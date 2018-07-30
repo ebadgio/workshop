@@ -1,6 +1,5 @@
-# node-react-redux-starter
-Intended to be used as a starter template for a project developed with Node.js on the backend 
-and with React.js on the frontend, integrated with React Redux and React router.
+# workshop-web
+
 
 ## Usage
 
