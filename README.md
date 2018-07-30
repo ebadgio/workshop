@@ -1,5 +1,15 @@
 # workshop-web
 
+## TODO
+* finish user model
+  * password hashing
+  * Writing stats?
+  * Followers (later?)
+  * Following (later?)
+* ~Create mlab sandbox~
+* Configure passport
+* Auth routes
+* Register/login frontend
 
 ## Usage
 
@@ -14,3 +24,4 @@
   4. **Webpack build**
       * During development: ```npm run build```
       * For production: ```npm run prod```
+

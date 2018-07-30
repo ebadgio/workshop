@@ -33,3 +33,12 @@
 .nav-tab:hover {
 	background: rgba(0,0,0,.1);
 }
+
+.slate-editor {
+	max-width: 800px;
+    width: 100%;
+    background: #fff;
+    min-height: 1200px;
+    padding: 20px;
+}
+

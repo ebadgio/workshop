@@ -14,7 +14,8 @@ import rootReducer from './reducers/index';
 
 // Components
 import Navbar from './components/Navbar'
-import Home from './components/Home/HomeContainer';
+import HomeContainer from './components/Home/HomeContainer';
+import EditorContainer from './components/Editor/EditorContainer';
 
 // Initialize redux store
 const store = createStore(rootReducer);
@@ -23,17 +24,14 @@ ReactDOM.render(
   <Provider store={store}>
         <Router history={history}>
         	<div>
-		    	<Navbar title={"React Redux Starter"}
+		    	<Navbar title={"Workshop"}
 		    			tabs={[
 		    					{text: "Home", route: '/home'},
 		    					{text: "Profile", route: '/profile'}
 							]}/>
 				<Switch>
-					<Route path="/" exact component={Home}/>
-					<Route path="/home" component={Home}/>
-					<Route path="/profile" render={() => <div className="page-wrapper">
-										    				<h1>This is the profile page!</h1>
-										    			</div>}/>
+					<Route path="/" exact component={HomeContainer}/>
+					<Route path="/edit" component={EditorContainer}/>
 				</Switch>
     		</div>
         </Router>

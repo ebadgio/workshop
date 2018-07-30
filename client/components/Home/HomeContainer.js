@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Components
-import Home from './Home';
+
 
 class HomeContainer extends React.Component {
 	constructor(props) {
@@ -20,9 +20,8 @@ class HomeContainer extends React.Component {
 
 	render() {
 		return(
-			<div className="page-wrapper">
-				<Home actionFunc={this.props.someAction}
-			   		  header={this.state.headerText}/>
+			<div className="page-wrapper frame">
+
 			</div>
 		);
 	}

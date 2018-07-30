@@ -33,26 +33,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .shadow {
-	-webkit-box-shadow: 0 2px 4px rgba(0,0,0,.5);;
-	box-shadow: 0 1px 7px rgba(0,0,0,.2);
+	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,.1);;
+	box-shadow: 0 1px 7px rgba(0,0,0,.1);
 }
 
 .background-hover {
 	-webkit-transition: background .35s ease;
 	transition: background .35s ease;
-}
-
-.button {
-	height: 40px;
-	width: fit-content;
-	border-radius: 27px;
-	background: #5870cb;
-	color: #fff;
-	margin: 10px;
-	cursor: pointer;
-	padding: 0 10px;
-}
-
-.button:hover {
-	background: #8c9eff;	
 }
