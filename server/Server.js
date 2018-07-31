@@ -17,6 +17,9 @@ const mongoose = require('mongoose');
 mongoose.connect(connect);
 mongoose.Promise = global.Promise;
 
+// Mongoose models
+const User = require('./models/User');
+
 // Create instance of express server
 const app = express();
 
