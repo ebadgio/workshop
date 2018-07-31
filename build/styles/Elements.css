@@ -1,14 +1,28 @@
-.button {
+.btn {
 	height: 40px;
 	width: fit-content;
-	border-radius: 27px;
-	background: #5870cb;
-	color: #fff;
-	margin: 10px;
+	border-radius: 6px;
+	margin: 10px 0;
 	cursor: pointer;
 	padding: 0 10px;
 }
 
-.button:hover {
-	background: #8c9eff;	
+.btn-primary {
+	background: #8c9eff;
+	color: #fff;
+}
+
+.flat-input {
+    height: 40px;
+    padding-left: 10px;
+    color: #424242;
+    border-radius: 6px;
+    font: inherit;
+    border: none;
+    background: rgba(0,0,0,.05);
+    margin: 15px 0;
+}
+
+input:focus, textarea:focus, select:focus {
+	outline: none !important;
 }

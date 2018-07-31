@@ -2,14 +2,18 @@
 
 ## TODO
 * finish user model
-  * password hashing
-  * Writing stats?
-  * Followers (later?)
-  * Following (later?)
+  * ~password hashing~
+  * ~Writing stats?~
+  * ~Followers (later?)~
+  * ~Following (later?)~
 * ~Create mlab sandbox~
-* Configure passport
+* ~Configure passport~
 * Auth routes
-* Register/login frontend
+  * ~Register~
+  * Login
+* Auth frontend
+  * ~Register~
+  * Login
 
 ## Usage
 

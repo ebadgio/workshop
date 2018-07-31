@@ -69,7 +69,7 @@ passport.use(new LocalStrategy((username, password, done) => {
                 return done(null, false, { message: 'Incorrect username.' });
             }
             // if passwords do not match, auth failed
-            if (user.password !== password) {
+            if (user.decryptPassowrd(user.password) !== password) {
                 return done(null, false, { message: 'Incorrect password.' });
             }
             // auth has has succeeded
@@ -78,15 +78,16 @@ passport.use(new LocalStrategy((username, password, done) => {
     }
 ));
 
+// Routes
+const auth = require('./routes/auth')(passport);
 
-// app.use('/db', db);
+app.use('/auth', auth);
 
 // frontend entry
 app.use('*', (req, res) => {
+	console.log('user', req.user);
     res.sendFile(path.join(__dirname, '..', 'build/index.html'));
 });
-
-
 
 // Handles unknown routes
 app.use((req, res, next) => {
