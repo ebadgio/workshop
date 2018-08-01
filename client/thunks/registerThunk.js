@@ -10,7 +10,12 @@ const registerThunk = (username, fname, lname, email, password) => (dispatch) =>
         password: password
     })
         .then((res) => {
-            console.log('register success', res);
+            if (res.data.success) {
+                console.log('register success', res);
+                dispatch({type: 'USER_REGISTER', user:res.data.user});
+                return;
+            }
+            console.log('register failure', res);
         })
         .catch((err) => {
             console.log('register error', err);

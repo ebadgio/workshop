@@ -7,6 +7,28 @@
 	padding: 0 10px;
 }
 
+.btn-outline-primary {
+	border: 1px solid #8c9eff;
+	color: #8c9eff;
+	background: #fff;
+}
+
+.btn-outline-primary:hover {
+	background: #8c9eff;
+	color: #fff;
+}
+
+.btn-outline-grey {
+	border: 1px solid #757575;
+	color: #757575;
+	background: #fff;
+}
+
+.btn-outline-grey:hover {
+	background: #757575;
+	color: #fff;
+}
+
 .btn-primary {
 	background: #8c9eff;
 	color: #fff;

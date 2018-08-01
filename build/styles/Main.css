@@ -58,6 +58,11 @@ h1, h2, h3, h4, h5 {
 	transition: background .35s ease;
 }
 
+.color-hover {
+	-webkit-transition: color .35s ease;
+	transition: color .35s ease;
+}
+
 .content-section {
 	background: #fff;
 	padding: 20px;

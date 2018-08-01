@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const crypto = require("crypto-js");
+const bcrypt = require('bcrypt-nodejs');
 
 const hashKey = process.env.HASH_KEY;
 
@@ -47,14 +47,14 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.methods.encryptPassword = (password) => {
-    encrypted = crypto.AES.encrypt(password, hashKey).toString();
-    console.log(encrypted);
-    return encrypted;
-};
 
-userSchema.methods.decryptPassword = (hasedPassword) => {
-    return crypto.AES.decrypt(hashedPassword, hashKey).toString();
+userSchema.methods.comparePassword = (candidatePassword, hashedPassword, cb) => {
+
+    bcrypt.compare(candidatePassword, hashedPassword, (err, res) => {
+        if (err) return cb(err);
+        console.log(res);
+        cb(null, res);
+    });
 };
 
 userSchema.pre('save', function(next) {
@@ -63,14 +63,16 @@ userSchema.pre('save', function(next) {
     // Only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
 
-    // Hash new password
-    hashed = user.encryptPassword(user.password);
+    // hash the password using our new salt
+    bcrypt.hash(user.password, null, null, function(err, hash) {
 
-    // Set hased password
-    user.password = hashed;
+        if (err) return next(err);
 
-    // Continue
-    next();
+        // override the cleartext password with the hashed one
+        user.password = hash;
+
+        next();
+    });
 
 });
 

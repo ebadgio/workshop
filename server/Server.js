@@ -14,7 +14,7 @@ const secret = process.env.SECRET;
 // MongoDB
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect(connect);
+mongoose.connect(connect, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 // Mongoose models
@@ -36,9 +36,14 @@ app.use(bodyParser.urlencoded({ limit: '5mb', extended: false }));
 
 // Create session
 app.use(session({
+    resave: false,
+    saveUninitialized: true,
     secret: secret,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
+
+const morgan = require("morgan");
+app.use(morgan('dev'));
 
 // Passport
 const passport = require('passport');
@@ -56,32 +61,47 @@ passport.deserializeUser((id, done) => {
 });
 
 // passport strategy
-passport.use(new LocalStrategy((username, password, done) => {
+passport.use(new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+    }, (email, password, next) => {
+        console.log('hit local');
         // Find the user with the given username
-        User.findOne({ username: username }, (err, user) => {
-            // if there's an error, finish trying to authenticate (auth failed)
-            if (err) {
-                console.error('Error fetching user in LocalStrategy', err);
-                return done(err);
-            }
-            // if no user present, auth failed
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            // if passwords do not match, auth failed
-            if (user.decryptPassowrd(user.password) !== password) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            // auth has has succeeded
-            return done(null, user);
-        });
+        User.findOne({ "email": email })
+            .then((user) => {
+                // if no user present, auth failed
+                if (!user) {
+                    return done(null, false, { message: 'Incorrect email.' });
+                }
+
+                user.comparePassword(password, user.password, (err, res) => {
+                    console.log('here', err);
+                
+                    if (err) return next(err);
+
+                    // auth has has succeeded
+                    if (res) return next(null, user);
+
+                    // Passwords do not match, auth failed
+                    return next(null, false, {message: 'incorrect password'});
+
+                });
+            })
+            .catch((err) => {
+                // if there's an error, finish trying to authenticate (auth failed)
+                console.log('Error fetching user in LocalStrategy', err);
+                return next(err);
+            });
     }
 ));
 
 // Routes
-const auth = require('./routes/auth')(passport);
+const auth = require('./routes/auth');
+const db = require('./routes/databaseAccess');
 
-app.use('/auth', auth);
+app.use('/auth', auth(passport));
+app.use('/db', db);
+
 
 // frontend entry
 app.use('*', (req, res) => {

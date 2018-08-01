@@ -18,20 +18,39 @@ module.exports = (passport) => {
                 res.status(500).redirect('/register');
                 return;
             }
-            console.log('User registered!', user);
-            res.json({success: true, user: user});
+            // req / res held in closure
+            req.logIn(user, function(err) {
+                if (err) { return res.json({success: false, error: err}) }
+                return res.json({success: true, user: req.user});
+            });
+
+            
         });
     });
 
+
     // POST Login page
-    router.post('/login',
-                passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+    router.post('/login', passport.authenticate('local'), function(req, res) {
+        console.log('hit login');
         if (req.user) {
             res.json({success: true, user: req.user});
         } else {
             res.json({success: false});
         }
     });
+
+
+    // router.post('/login', (req, res, next) => {
+
+    //     passport.authenticate('local', function(err, user, info) {
+    //         if (err) return res.json({success: false, error: err});
+    //         if (!req.user) return res.json({success: false});
+
+    //         return res.json({success: true, user: req.user});
+
+    //     })(req, res, next);
+
+    // });
 
     return router;
 };

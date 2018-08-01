@@ -2,10 +2,10 @@ import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
 // Reducers
-import homeReducer from './homeReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-	homeReducer: homeReducer   
+	userReducer: userReducer   
 	// add all your reducers here 
 });
 

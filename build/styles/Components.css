@@ -34,6 +34,17 @@
 	background: rgba(0,0,0,.1);
 }
 
+.nav-link {
+	color: #757575;
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0 10px;
+}
+
+.nav-link:hover {
+	color: #424242;
+}
+
 .slate-editor {
 	max-width: 800px;
     width: 100%;

@@ -1,7 +1,7 @@
 # workshop-web
 
 ## TODO
-* finish user model
+* ~finish user model~
   * ~password hashing~
   * ~Writing stats?~
   * ~Followers (later?)~
@@ -10,10 +10,15 @@
 * ~Configure passport~
 * Auth routes
   * ~Register~
-  * Login
+  * ~Login~
 * Auth frontend
   * ~Register~
+  * ~Login~
+* Frontend auth error handling
+  * Register
   * Login
+* ~Load user from session~
+* Logout
 
 ## Usage
 
