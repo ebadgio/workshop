@@ -1,6 +1,16 @@
 # workshop-web
+This will be a site for editing and sharing creative writing works such as short stories, poems, screenplays, personal essays, etc. It will be designed in a way similar to Medium, where you can create the works inside the site with a rich text editor, and save them there. Then you can also read and discover other people's works, add comments, and also follow users.
+
+**Technologies used**
+ * Node.js
+ * Express.js; Passport.js
+ * MongoDB
+ * React.js; Redux; React-Router; Redux-Thunk
+ * Webpack
+ * Slate.js (an opensource react framework for building rich text editors)
 
 ## TODO
+*Updated and added to as stages of development are finished*
 
 ### User Auth
 * ~finish user model~
@@ -22,7 +32,7 @@
 * ~Load user from session~
 * ~Logout~
 
-### work creation
+### work creation with rich text editor
 * Text formatting
     * ~Bold~
     * ~Italics~
