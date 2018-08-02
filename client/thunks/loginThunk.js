@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { push } from 'react-router-redux';
 import URL from '../../info';
 
 const loginThunk = (email, password) => (dispatch) => {
@@ -11,6 +12,7 @@ const loginThunk = (email, password) => (dispatch) => {
             if (res.data.success) {
                 console.log('login success', res);
                 dispatch({type: 'USER_LOGIN', user:res.data.user});
+                dispatch(push('/'));
                 return;
             }
             console.log('login failure', res);

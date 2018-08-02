@@ -28,7 +28,6 @@ module.exports = (passport) => {
         });
     });
 
-
     // POST Login page
     router.post('/login', passport.authenticate('local'), function(req, res) {
         console.log('hit login');
@@ -37,6 +36,11 @@ module.exports = (passport) => {
         } else {
             res.json({success: false});
         }
+    });
+
+    router.get('/logout', function(req, res){
+        req.logout(); // Passport logout function
+        return res.json({success: true});
     });
 
 

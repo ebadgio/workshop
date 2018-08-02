@@ -5,7 +5,8 @@ import { combineReducers } from 'redux';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-	userReducer: userReducer   
+	userReducer: userReducer,
+	routing: routerReducer
 	// add all your reducers here 
 });
 

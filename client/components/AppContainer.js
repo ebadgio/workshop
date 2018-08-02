@@ -23,7 +23,9 @@ class AppContainer extends React.Component {
 
 	componentWillMount() {
 		console.log('mounting', this.props);
-		this.props.fetchUser();
+		if (!this.props.user.username) {
+            this.props.fetchUser();
+        }
 	}
 
 	render() {
@@ -48,7 +50,7 @@ AppContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	
+	user: state.userReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

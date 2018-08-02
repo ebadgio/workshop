@@ -1,6 +1,8 @@
 # workshop-web
 
 ## TODO
+
+### User Auth
 * ~finish user model~
   * ~password hashing~
   * ~Writing stats?~
@@ -8,17 +10,37 @@
   * ~Following (later?)~
 * ~Create mlab sandbox~
 * ~Configure passport~
-* Auth routes
+* ~Auth routes~
   * ~Register~
   * ~Login~
-* Auth frontend
+* ~Auth frontend~
   * ~Register~
   * ~Login~
 * Frontend auth error handling
   * Register
   * Login
 * ~Load user from session~
-* Logout
+* ~Logout~
+
+### work creation
+* Text formatting
+    * Bold
+    * Italics
+    * Underline
+    * Header
+    * Text alignment (left, center, right)
+    * Font size
+* editing page design
+    * Text formatting buttons
+    * User photo and name
+    * Title input
+* functionality
+    * Finish and save
+    * add html to Mongo
+    * save draft (later)
+    * Load from saved draft (later)
+    
+    
 
 ## Usage
 
