@@ -24,9 +24,9 @@
 
 ### work creation
 * Text formatting
-    * Bold
-    * Italics
-    * Underline
+    * ~Bold~
+    * ~Italics~
+    * ~Underline~
     * Header
     * Text alignment (left, center, right)
     * Font size
