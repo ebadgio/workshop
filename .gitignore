@@ -61,3 +61,7 @@ typings/
 
 env.sh
 
+# Webpack bundles
+app.bundle.js
+app.bundle.js.map
+

@@ -3,6 +3,7 @@
 body {
 	margin: 0;
 	font-family: sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
 .box {

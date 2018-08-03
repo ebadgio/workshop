@@ -34,6 +34,17 @@
 	color: #fff;
 }
 
+.btn-toolbar {
+	border-radius: 0;
+	margin: 0;
+	color: #bdbdbd;
+	height: 100%;
+}
+
+.btn-toolbar:hover {
+	color: #fff;
+}
+
 .flat-input {
     height: 40px;
     padding-left: 10px;

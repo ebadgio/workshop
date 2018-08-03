@@ -2,6 +2,8 @@ import React from 'react';
 import {Editor} from 'slate-react';
 import {Value} from 'slate';
 
+// Components
+import HoverMenu from './HoverMenu';
 
 const initialValue = Value.fromJSON({
   document: {
@@ -23,7 +25,7 @@ const initialValue = Value.fromJSON({
     ],
   },
 })
-// Define our app...
+
 class TextEditor extends React.Component {
   constructor() {
     super();
@@ -34,7 +36,50 @@ class TextEditor extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.renderMark = this.renderMark.bind(this);
+    this.updateMenu = this.updateMenu.bind(this);
   }
+
+  componentDidMount() {
+      this.updateMenu()
+  }
+
+  componentDidUpdate() {
+      this.updateMenu()
+  }
+
+  /**
+   * Update the menu's absolute position.
+   */
+
+  updateMenu() {
+    const { value } = this.state
+    const menu = this.menu
+    if (!menu) return
+
+    try {
+        if (value.isBlurred || value.isEmpty) {
+        menu.removeAttribute('style')
+        return
+        }
+
+        const selection = window.getSelection()
+
+        const range = selection.getRangeAt(0)
+        const rect = range.getBoundingClientRect()
+        menu.style.opacity = 1
+        menu.style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`
+
+        menu.style.left = `${rect.left +
+          window.pageXOffset -
+          menu.offsetWidth / 2 +
+          rect.width / 2}px`
+    } catch (e) {
+        // console.log(e);
+        return;
+    }
+
+  }
+
 
   // On change, update the app's React state with the new editor value.
   onChange({ value }) {
@@ -84,7 +129,12 @@ class TextEditor extends React.Component {
   // Render the editor.
   render() {
     return (
-      <div className="slate-editor">
+      <div className="slate-editor box">
+        <HoverMenu
+          innerRef={menu => (this.menu = menu)}
+          value={this.state.value}
+          onChange={this.onChange}
+        />
         <Editor value={this.state.value} 
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}

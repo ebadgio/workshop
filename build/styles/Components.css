@@ -51,5 +51,13 @@
     background: #fff;
     min-height: 1200px;
     padding: 20px;
+	font-family: 'Crimson Text', serif;
+	line-height: 26px;
+	font-size: 22px;
+}
+
+.toolbar-icons {
+	height: 20px;
+	width: 20px;
 }
 

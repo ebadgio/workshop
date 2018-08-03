@@ -54,15 +54,16 @@ This will be a site for editing and sharing creative writing works such as short
 
 ## Usage
 
-  1. **Fork Repsository**
-      * To use this template, fork the repository and use it as the basis for you node/react web application.
-      * Then clone your new repository, cd into it from command line, and continue with the next steps.
+  1. **Clone Repsository**
+      * Clone repository, enter package (```cd workshop-web/```) from command line, and continue with the next steps.
   2. **Install dependencies:**
       * Command: ```npm install```
+  3. **Run Webpack**
+      * Command: ```npm run build```
   3. **Start the server**
       * Command: ```npm run server```
       * Navigate to http://localhost:3000 and you should see **We're up and running!**
-  4. **Webpack build**
+  4. **After making changes always  run webpack**
       * During development: ```npm run build```
       * For production: ```npm run prod```
 

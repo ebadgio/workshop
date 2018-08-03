@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // Components
 import TextEditor from '../Editor/TextEditor';
 
+
 class EditorContainer extends React.Component {
 	constructor(props) {
 		super(props);
