@@ -41,7 +41,7 @@ This will be a site for editing and sharing creative writing works such as short
     * Text alignment (left, center, right)
     * Font size
 * editing page design
-    * Text formatting buttons
+    * ~Hovering Toolbar~
     * User photo and name
     * Title input
 * functionality
