@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-import TextInput from '../TextInput';
-import Button from '../Button';
+import TextInput from '../elements/TextInput';
+import Button from '../elements/Button';
 
 // Thunks
 import registerThunk from '../../thunks/registerThunk';

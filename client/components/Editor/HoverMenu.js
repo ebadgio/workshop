@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 // Components
 import ToolBar from './ToolBar';
-import Button from '../Button';
-import Icon from '../Icon';
+import Button from '../elements/Button';
+import Icon from '../elements/Icon';
 
 class HoverMenu extends React.Component {
 
@@ -17,30 +17,34 @@ class HoverMenu extends React.Component {
 
     return ReactDOM.createPortal(
       <ToolBar className={className} innerRef={innerRef}>
-        {this.renderMarkButton('bold', 'bold')}
-        {this.renderMarkButton('italic', 'italic')}
-        {this.renderMarkButton('underline', 'underline')}
+        {this.renderMarkButton('bold', 'bold', {})}
+        {this.renderMarkButton('italic', 'italic', {})}
+        {this.renderMarkButton('underline', 'underline', {})}
+        {this.renderMarkButton('title', 'type', {})}
+        {this.renderMarkButton('subtitle', 'type', {width: '20px', height: '20px'})}
+        {this.renderMarkButton('center', 'align-center', {})}
+        {this.renderMarkButton('right', 'align-right', {})}
       </ToolBar>,
       root
     )
   }
 
-  renderMarkButton(type, icon) {
-    const { value } = this.props
-    const isActive = value.activeMarks.some(mark => mark.type == type)
+  renderMarkButton(type, icon, iconStyle) {
+    const { value } = this.props;
+    const isActive = value.activeMarks.some(mark => mark.type === type);
     return (
       <Button
         type={"toolbar"}
         active={isActive}
         action={event => this.onClickMark(event, type)}
-        contents={<Icon name={icon}/>}/>
+        contents={<Icon name={icon} style={iconStyle} />}/>
     )
   }
 
   onClickMark(event, type) {
-    const { value, onChange } = this.props
-    event.preventDefault()
-    const change = value.change().toggleMark(type)
+    const { value, onChange } = this.props;
+    event.preventDefault();
+    const change = value.change().toggleMark(type);
     onChange(change)
   }
 }

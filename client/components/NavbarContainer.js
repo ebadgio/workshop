@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 // Components
-import Button from './Button';
+import Button from './elements/Button';
 
 // Thunks
 import logoutUserThunk from "../thunks/logoutUserThunk";

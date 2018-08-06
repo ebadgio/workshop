@@ -31,7 +31,7 @@ class TextEditor extends React.Component {
     super();
     this.state = {
       value: initialValue
-    }
+    };
 
     this.onChange = this.onChange.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -52,22 +52,22 @@ class TextEditor extends React.Component {
    */
 
   updateMenu() {
-    const { value } = this.state
-    const menu = this.menu
-    if (!menu) return
+    const { value } = this.state;
+    const menu = this.menu;
+    if (!menu) return;
 
     try {
         if (value.isBlurred || value.isEmpty) {
-        menu.removeAttribute('style')
-        return
+          menu.removeAttribute('style');
+          return
         }
 
-        const selection = window.getSelection()
+        const selection = window.getSelection();
 
-        const range = selection.getRangeAt(0)
-        const rect = range.getBoundingClientRect()
-        menu.style.opacity = 1
-        menu.style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        menu.style.opacity = 1;
+        menu.style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`;
 
         menu.style.left = `${rect.left +
           window.pageXOffset -
@@ -75,7 +75,6 @@ class TextEditor extends React.Component {
           rect.width / 2}px`
     } catch (e) {
         // console.log(e);
-        return;
     }
 
   }
@@ -88,26 +87,26 @@ class TextEditor extends React.Component {
 
   onKeyDown(event, change) {
 
-    if (!event.ctrlKey && !event.metaKey) return
+    if (!event.ctrlKey && !event.metaKey) return;
 
     // Decide what to do based on the key code...
     switch (event.key) {
       // When "B" is pressed, add a "bold" mark to the text.
       case 'b': {
-        event.preventDefault()
-        change.toggleMark('bold')
+        event.preventDefault();
+        change.toggleMark('bold');
         return true
       }
 
       case 'i': {
-        event.preventDefault()
-        change.toggleMark('italic')
+        event.preventDefault();
+        change.toggleMark('italic');
         return true
       }
       
       case 'u': {
-        event.preventDefault()
-        change.toggleMark('underline')
+        event.preventDefault();
+        change.toggleMark('underline');
         return true
       }
 
@@ -118,11 +117,23 @@ class TextEditor extends React.Component {
   renderMark(props) {
     switch (props.mark.type) {
       case 'bold':
-        return <strong>{props.children}</strong>
+        return <strong>{props.children}</strong>;
       case 'italic':
-        return <em>{props.children}</em>
+        return <em>{props.children}</em>;
       case 'underline':
-        return <u>{props.children}</u>
+        return <u>{props.children}</u>;
+      case 'title':
+        return <h2>{props.children}</h2>;
+      case 'subtitle':
+        return <h3>{props.children}</h3>;
+      case 'left':
+        return <div style={{textAlign: 'left'}}>{props.children}</div>;
+      case 'right':
+        return <div style={{textAlign: 'right'}}>{props.children}</div>;
+      case 'center':
+        return <div style={{textAlign: 'center'}}>{props.children}</div>;
+      default:
+        return <span>{props.children}</span>
     }
   }
 
@@ -135,6 +146,7 @@ class TextEditor extends React.Component {
           value={this.state.value}
           onChange={this.onChange}
         />
+        <div className="w-fill frame"><input id="editor-title" type="text" placeholder="Title" /></div>
         <Editor value={this.state.value} 
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}

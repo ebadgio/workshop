@@ -51,9 +51,19 @@
     background: #fff;
     min-height: 1200px;
     padding: 20px;
-	font-family: 'Crimson Text', serif;
-	line-height: 26px;
+	font-family: 'Crimson Text', serif !important;
+	line-height: 30px;
 	font-size: 22px;
+}
+
+#editor-title {
+    font-size: 26px;
+    font-style: italic;
+    text-align: center;
+    border: none;
+    height: fit-content;
+    padding: 10px;
+    font-family: 'Crimson Text', serif !important;
 }
 
 .toolbar-icons {

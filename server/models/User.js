@@ -31,12 +31,12 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: ''
+        default: 'https://s3.amazonaws.com/workshop-web/default-pro-pic.jpg'
     },
     profilePicture: {
         type: String,
-        default: ''
-    }
+        default: 'https://s3.amazonaws.com/workshop-web/default-pro-pic.jpg'
+    },
     bio: {
         type: String,
         default: ''
