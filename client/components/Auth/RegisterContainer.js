@@ -30,7 +30,7 @@ class RegisterContainer extends React.Component {
 		return (
 
 			<div className="page-wrapper frame">
-				<div className="content-section box col">
+				<div className="content-section box col-center">
 					<div className="w-fill">
 						<h2>Register</h2>
 					</div>

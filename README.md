@@ -39,15 +39,22 @@ This will be a site for editing and sharing creative writing works such as short
     * ~Underline~
     * ~Header~
     * ~Text alignment (left, center, right)~
+    * ~Tab to indent~
 * editing page design
     * ~Hovering Toolbar~
-    * User photo and name
+    * ~User photo and name~
     * ~Title input~
 * functionality
     * Finish and save
+    * api routes
     * add html to Mongo
     * save draft (later)
     * Load from saved draft (later)
+* mongo models
+    * Draft
+    * Work
+    * Type
+    * Topic
     
     
 

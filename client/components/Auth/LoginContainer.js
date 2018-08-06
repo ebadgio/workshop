@@ -25,7 +25,7 @@ class LoginContainer extends React.Component {
 	render() {
 		return (
 			<div className="page-wrapper frame">
-				<div className="content-section box col">
+				<div className="content-section box col-center">
 					<div className="w-fill">
 						<h2>Login</h2>
 					</div>

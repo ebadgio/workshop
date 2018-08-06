@@ -1,9 +1,11 @@
 import React from 'react';
 import {Editor} from 'slate-react';
 import {Value} from 'slate';
+import PropTypes from 'prop-types';
 
 // Components
 import HoverMenu from './HoverMenu';
+import Avatar from '../elements/Avatar';
 
 const initialValue = Value.fromJSON({
   document: {
@@ -87,11 +89,37 @@ class TextEditor extends React.Component {
 
   onKeyDown(event, change) {
 
+    // console.log(event.key);
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { value } = change;
+      const { isCollapsed, document, selection } = value;
+
+      if (isCollapsed) {
+        // Insert indent at place of cursor
+        return change.insertText('         ').focus();
+      }
+
+      // Get the lines currently highlighted
+      const lines = document
+        .getBlocksAtRange(selection);
+
+      // Indent all highlighted lines
+      return lines.reduce((c, line) => {
+          // Insert an indent at start of line
+          const text = line.nodes.first();
+          return c.insertTextByKey(text.key, 0, '        ');
+      }, change);
+    }
+
     if (!event.ctrlKey && !event.metaKey) return;
 
     // Decide what to do based on the key code...
     switch (event.key) {
-      // When "B" is pressed, add a "bold" mark to the text.
+
       case 'b': {
         event.preventDefault();
         change.toggleMark('bold');
@@ -109,7 +137,6 @@ class TextEditor extends React.Component {
         change.toggleMark('underline');
         return true
       }
-
     }
   }
 
@@ -146,7 +173,16 @@ class TextEditor extends React.Component {
           value={this.state.value}
           onChange={this.onChange}
         />
-        <div className="w-fill frame"><input id="editor-title" type="text" placeholder="Title" /></div>
+        <div className="w-fill row">
+          <Avatar image={this.props.user.avatar}/>
+          <div className="faint-text main-font col" style={{alignSelf: 'baseline'}}>
+            <span className="fs-14">{this.props.user.fullname}</span>
+
+          </div>  
+        </div>
+        <div className="w-fill frame">
+          <input id="editor-title" type="text" placeholder="Title" />
+        </div>
         <Editor value={this.state.value} 
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}
@@ -154,5 +190,9 @@ class TextEditor extends React.Component {
       </div>);
   }
 }
+
+TextEditor.propTypes = {
+  user: PropTypes.object
+};
 
 export default TextEditor

@@ -39,11 +39,19 @@ class NavbarContainer extends React.Component {
 					{
 						this.state.user.username ? 
 						<div className="row nav-tabs">
+							<Link className="nav-link color-hover"
+								  to={'/edit'}>
+								edit
+							</Link>
 							<div className="nav-link color-hover">{this.state.user.username}</div>
 							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
 						</div>
 						:
 						<div className="row nav-tabs">
+							<Link className="nav-link color-hover"
+								  to={'/edit'}>
+								edit
+							</Link>
 							<Link className="nav-link color-hover"
 								  to={'/login'}>
 								Sign in

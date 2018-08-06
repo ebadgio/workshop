@@ -5,11 +5,17 @@ const User = require('../models/User');
 module.exports = (passport) => {
 
     router.post('/register', (req, res) => {
+        fname = req.body.fname
+        lname = req.body.lname
+        fname[0] = fname[0].toUpperCase();
+        lname[0] = lname[0].toUpperCase();
+
         const u = new User({
             username: req.body.username,
             password: req.body.password,
-            fname: req.body.fname,
-            lname: req.body.lname,
+            fname: fname,
+            lname: lname,
+            fullname: fname + ' ' + lname,
             email: req.body.email
         });
         u.save((err, user) => {

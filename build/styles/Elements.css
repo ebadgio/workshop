@@ -37,7 +37,7 @@
 .btn-toolbar {
 	border-radius: 0;
 	margin: 0;
-	color: #bdbdbd;
+	color: #757575;
 	height: 100%;
     padding: 0 7px;
 }
@@ -62,9 +62,13 @@ input:focus, textarea:focus, select:focus {
 }
 
 .avatar-wrapper {
-
+    height: 45px;
+    width: 45px;
+    overflow: hidden;
+	border-radius: 50%;
+	margin-right: 20px;
 }
 
 .avatar-img {
-
+	width: 100%;
 }
