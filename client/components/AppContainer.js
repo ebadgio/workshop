@@ -25,7 +25,11 @@ class AppContainer extends React.Component {
 		console.log('mounting', this.props);
 		if (!this.props.user.username) {
             this.props.fetchUser();
-        }
+		}
+		if (window.location.pathname.includes('/edit')) {
+			console.log('in edit');
+			this.props.changeNav();
+		}
 	}
 
 	render() {
@@ -46,7 +50,8 @@ class AppContainer extends React.Component {
 }
 
 AppContainer.propTypes = {
-	fetchUser: PropTypes.func
+	fetchUser: PropTypes.func,
+	changeNav: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -54,7 +59,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchUser: () => dispatch(fetchUserThunk())
+	fetchUser: () => dispatch(fetchUserThunk()),
+	changeNav: () => dispatch({type: 'OPEN_EDIT'})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

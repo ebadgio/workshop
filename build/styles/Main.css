@@ -59,8 +59,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .shadow {
-	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,.1);;
-	box-shadow: 0 1px 7px rgba(0,0,0,.1);
+	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,.05);;
+	box-shadow: 0 1px 7px rgba(0,0,0,.05);
 }
 
 .background-hover {

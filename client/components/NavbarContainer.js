@@ -16,52 +16,110 @@ class NavbarContainer extends React.Component {
 	constructor() {
 		super();
 		this.state = {
+			scrolled: false,
+			isEditing: false,
 			user: {}
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-	    console.log('next', nextProps);
-		this.setState({user: nextProps.user});
+		console.log('next', nextProps);
+		this.setState({user: nextProps.user, isEditing: nextProps.isEditing});
 	}
 
+	componentDidMount() {
+		document.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                this.base()
+            } else {
+                if (this.state.scrolled) {
+                    this.base();
+                    this.setState({scrolled: false});
+                } else {
+                    this.lift();
+                }
+            }
+        });
+	}
+
+	base() {
+        const elem = document.getElementById('nav');
+        elem.classList.remove('shadow');
+    };
+
+    lift() {
+        const elem = document.getElementById('nav');
+        elem.classList.add('shadow');
+    }
+
 	render() {
+
+		if (this.state.isEditing) {
+			return (
+				<div className="nav frame" id="nav">
+					<div className="nav-content row-apart">
+						<h2>
+							<Link to="/">
+								Workshop
+							</Link>
+						</h2>
+						<div className="row nav-tabs">
+							<div className="nav-link color-hover">
+								Save for later
+							</div>
+							<div className="nav-link color-hover">
+								Publish
+							</div>
+							<div className="nav-link color-hover">{this.state.user.username}</div>
+							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
+		if (this.state.user.username) {
+			return (
+				<div className="nav frame" id="nav">
+					<div className="nav-content row-apart">
+						<h2>
+							<Link to="/">
+								Workshop
+							</Link>
+						</h2>
+						<div className="row nav-tabs">
+							<Link className="nav-link color-hover"
+									onClick={() => this.props.openEdit()}
+									to={'/edit'}>
+								edit
+							</Link>
+							<div className="nav-link color-hover">{this.state.user.username}</div>
+							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
 		
 		return(
-			<div className="nav shadow frame">
-
+			<div className="nav frame" id="nav">
 				<div className="nav-content row-apart">
 					<h2>
                         <Link to="/">
 						    Workshop
                         </Link>
 					</h2>
-					{
-						this.state.user.username ? 
-						<div className="row nav-tabs">
-							<Link className="nav-link color-hover"
-								  to={'/edit'}>
-								edit
-							</Link>
-							<div className="nav-link color-hover">{this.state.user.username}</div>
-							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
-						</div>
-						:
-						<div className="row nav-tabs">
-							<Link className="nav-link color-hover"
-								  to={'/edit'}>
-								edit
-							</Link>
-							<Link className="nav-link color-hover"
-								  to={'/login'}>
-								Sign in
-							</Link>
-							<Link className="nav-link"
-								  to={'/register'}>
-								<Button type="outline-grey" contents="Get started"/>
-							</Link>
-						</div>
-					}
+					<div className="row nav-tabs">
+						<Link className="nav-link color-hover"
+								to={'/login'}>
+							Sign in
+						</Link>
+						<Link className="nav-link"
+								to={'/register'}>
+							<Button type="outline-grey" contents="Get started"/>
+						</Link>
+					</div>
 				</div>
 			</div>
 		)
@@ -70,15 +128,18 @@ class NavbarContainer extends React.Component {
 
 NavbarContainer.propTypes = {
 	user: PropTypes.object,
+	openEdit: PropTypes.func,
     logout: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
-	user: state.userReducer
+	user: state.userReducer,
+	isEditing: state.editReducer.isEditing
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  	logout: () => dispatch(logoutUserThunk())
+	  logout: () => dispatch(logoutUserThunk()),
+	  openEdit: () => dispatch({type: 'OPEN_EDIT'}),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
