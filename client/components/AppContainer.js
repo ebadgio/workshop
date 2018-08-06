@@ -10,7 +10,10 @@ import history from '../history'; // Import history in any component you want to
 import EditorContainer from './Editor/EditorContainer';
 import RegisterContainer from './Auth/RegisterContainer';
 import LoginContainer from './Auth/LoginContainer';
-import NavbarContainer from './NavbarContainer'
+import NavbarContainer from './NavbarContainer';
+
+// Components
+import Icon from './elements/Icon';
 
 // Thunks 
 import fetchUserThunk from '../thunks/fetchUserThunk';
@@ -38,7 +41,9 @@ class AppContainer extends React.Component {
 	        	<div>
 			    	<NavbarContainer />
 					<Switch>
-						<Route path="/" exact render={() => <div className="page-wrapper frame"><h1>Home page</h1></div>}/>
+						<Route path="/" exact render={() => <div className="page-wrapper frame">
+							<h1>Home page</h1>
+						</div>}/>
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>
 						<Route path="/edit" component={EditorContainer}/>

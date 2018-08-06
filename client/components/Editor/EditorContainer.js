@@ -5,39 +5,65 @@ import PropTypes from 'prop-types';
 // Components
 import TextEditor from '../Editor/TextEditor';
 
+// Thunks
+import saveDraftThunk from '../../thunks/saveDraftThunk';
+
 
 class EditorContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: props.user
+			user: props.user,
+			isSaving: props.isSaving,
+			saveSuccess: props.saveSucess
 		};
+		this.saveDraft = this.saveDraft.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({user: nextProps.user})
+		// console.log('editor container', nextProps);
+		this.setState(nextProps);
+	}
+
+	componentDidMount() {
+		window.feather.replace();
+	}
+
+	saveDraft(author, title, content, draftId) {
+		this.props.saveDraft(author, title, content, draftId);
 	}
 
 	render() {
 		return(
 			<div className="page-wrapper frame">
-				<TextEditor user={this.state.user} />
+				<TextEditor user={this.state.user}
+							isSaving={this.state.isSaving} 
+							saveSuccess={this.state.saveSuccess}
+							draftId={this.state.draftId}
+							saveDraft={this.saveDraft}/>
 			</div>
 		);
 	}
 }
 
 EditorContainer.propTypes = {
-	user: PropTypes.object
+	user: PropTypes.object,
+	isSaving: PropTypes.bool,
+	saveSuccess: PropTypes.bool,
+	saveDraft: PropTypes.func,
+	draftId: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
-	user: state.userReducer
+	user: state.userReducer,
+	isSaving: state.editReducer.isSaving,
+	saveSuccess: state.editReducer.saveSuccess,
+	draftId: state.editReducer.draftId
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
-  	
+	saveDraft: (author, title, content, draftId) => dispatch(saveDraftThunk(author, title, content, draftId)) 
 });
 
 

@@ -32,7 +32,9 @@ class TextEditor extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: initialValue
+      value: initialValue,
+      timeoutId: '',
+      saveState: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -42,17 +44,23 @@ class TextEditor extends React.Component {
   }
 
   componentDidMount() {
-      this.updateMenu()
+    this.updateMenu()
   }
 
   componentDidUpdate() {
-      this.updateMenu()
+    this.updateMenu()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('text editor', nextProps);
+    if (!nextProps.isSaving && nextProps.saveSuccess) {
+      this.setState({saveState: 'Saved'});
+    }
   }
 
   /**
    * Update the menu's absolute position.
    */
-
   updateMenu() {
     const { value } = this.state;
     const menu = this.menu;
@@ -84,12 +92,31 @@ class TextEditor extends React.Component {
 
   // On change, update the app's React state with the new editor value.
   onChange({ value }) {
-    this.setState({ value })
+
+    // Clear last timeout from executing (if hasn't exececuted yet)
+    clearTimeout(this.state.timeoutId);
+
+    // Start a new timeout
+    const timeoutId = setTimeout(() => {
+      
+      console.log('called');
+
+      // When it executes, save the draft as it is now
+      try {
+        this.props.saveDraft(this.props.user._id,
+          document.getElementById('editor-title').value,
+          JSON.stringify(value.toJSON()),
+          this.props.draftId);
+      } catch(e) {
+
+      }
+
+    }, 1000);
+
+    this.setState({ value:value, timeoutId: timeoutId, saveState: 'Saving ...'});
   }
 
   onKeyDown(event, change) {
-
-    // console.log(event.key);
 
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -138,6 +165,7 @@ class TextEditor extends React.Component {
         return true
       }
     }
+
   }
 
   // Add a `renderMark` method to render marks.
@@ -175,9 +203,11 @@ class TextEditor extends React.Component {
         />
         <div className="w-fill row">
           <Avatar image={this.props.user.avatar}/>
-          <div className="faint-text main-font col" style={{alignSelf: 'baseline'}}>
-            <span className="fs-14">{this.props.user.fullname}</span>
-
+          <div className="faint-text main-font col fs-14" style={{alignSelf: 'baseline'}}>
+            <span className="weak-text">{this.props.user.fullname}</span>
+            {this.state.saveState ?
+               <span>Draft &bull; <span>{this.state.saveState}</span></span> :
+               <span>Draft</span>}
           </div>  
         </div>
         <div className="w-fill frame">
@@ -192,7 +222,11 @@ class TextEditor extends React.Component {
 }
 
 TextEditor.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  isSaving: PropTypes.bool,
+	saveSuccess: PropTypes.bool,
+  saveDraft: PropTypes.func,
+  draftId: PropTypes.string
 };
 
 export default TextEditor

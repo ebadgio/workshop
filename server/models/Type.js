@@ -4,6 +4,10 @@ const typeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    uses: {
+        type: Number,
+        default: 0
     }
 });
 

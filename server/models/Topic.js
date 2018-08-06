@@ -10,7 +10,11 @@ const topicSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Topic'
         }
-    ]
+    ],
+    uses: {
+        type: Number,
+        default: 0
+    }
 });
 
 

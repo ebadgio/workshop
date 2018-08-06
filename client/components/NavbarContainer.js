@@ -23,7 +23,7 @@ class NavbarContainer extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log('next', nextProps);
+		// console.log('next', nextProps);
 		this.setState({user: nextProps.user, isEditing: nextProps.isEditing});
 	}
 
