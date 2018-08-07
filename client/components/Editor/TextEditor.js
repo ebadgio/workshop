@@ -103,7 +103,7 @@ class TextEditor extends React.Component {
 
       // When it executes, save the draft as it is now
       try {
-        this.props.saveDraft(this.props.user._id,
+        this.props.saveDraft(this.props.user,
           document.getElementById('editor-title').value,
           JSON.stringify(value.toJSON()),
           this.props.draftId);
@@ -118,6 +118,7 @@ class TextEditor extends React.Component {
 
   onKeyDown(event, change) {
 
+    // Handles tab to indent functionality
     if (event.key === 'Tab') {
       event.preventDefault();
       event.stopPropagation();
@@ -141,24 +142,28 @@ class TextEditor extends React.Component {
           return c.insertTextByKey(text.key, 0, '        ');
       }, change);
     }
-
+    
+    // If it wasn't tab and the first key isn't command or control, then do nothing
     if (!event.ctrlKey && !event.metaKey) return;
 
     // Decide what to do based on the key code...
     switch (event.key) {
-
+      
+      // Bold 
       case 'b': {
         event.preventDefault();
         change.toggleMark('bold');
         return true
       }
 
+      // Italic
       case 'i': {
         event.preventDefault();
         change.toggleMark('italic');
         return true
       }
       
+      // Underline
       case 'u': {
         event.preventDefault();
         change.toggleMark('underline');
@@ -196,11 +201,13 @@ class TextEditor extends React.Component {
   render() {
     return (
       <div className="slate-editor box">
+
         <HoverMenu
           innerRef={menu => (this.menu = menu)}
           value={this.state.value}
           onChange={this.onChange}
         />
+
         <div className="w-fill row">
           <Avatar image={this.props.user.avatar}/>
           <div className="faint-text main-font col fs-14" style={{alignSelf: 'baseline'}}>
@@ -210,9 +217,11 @@ class TextEditor extends React.Component {
                <span>Draft</span>}
           </div>  
         </div>
+
         <div className="w-fill frame">
           <input id="editor-title" type="text" placeholder="Title" />
         </div>
+
         <Editor value={this.state.value} 
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}

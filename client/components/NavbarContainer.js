@@ -70,7 +70,10 @@ class NavbarContainer extends React.Component {
 							<div className="nav-link color-hover">
 								Publish
 							</div>
-							<div className="nav-link color-hover">{this.state.user.username}</div>
+							<Link className="nav-link color-hover"
+								  to={'/u/' + this.state.user.username}>
+								  {this.state.user.username}
+							</Link>
 							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
 						</div>
 					</div>
@@ -93,7 +96,10 @@ class NavbarContainer extends React.Component {
 									to={'/edit'}>
 								edit
 							</Link>
-							<div className="nav-link color-hover">{this.state.user.username}</div>
+							<Link className="nav-link color-hover"
+								  to={'/u/' + this.state.user.username}>
+								  {this.state.user.username}
+							</Link>
 							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
 						</div>
 					</div>

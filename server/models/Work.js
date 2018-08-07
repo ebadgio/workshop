@@ -6,6 +6,10 @@ const workSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
+    authorUsername: {
+        type: String,
+        required: true
+    },
     content: {
         type: String,
         required: true
@@ -29,6 +33,9 @@ const workSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }
+},
+{
+    timestamps: true
 });
 
 

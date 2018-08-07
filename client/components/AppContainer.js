@@ -11,6 +11,7 @@ import EditorContainer from './Editor/EditorContainer';
 import RegisterContainer from './Auth/RegisterContainer';
 import LoginContainer from './Auth/LoginContainer';
 import NavbarContainer from './NavbarContainer';
+import ProfileContainer from './Profile/ProfileContainer';
 
 // Components
 import Icon from './elements/Icon';
@@ -25,12 +26,15 @@ class AppContainer extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log('mounting', this.props);
+		// console.log('mounting', this.props);
+
+		// If user is not in redux store, fetch from server
 		if (!this.props.user.username) {
-            this.props.fetchUser();
+			this.props.fetchUser();
 		}
+
+		// Sets redux store paramater isEditing to true
 		if (window.location.pathname.includes('/edit')) {
-			console.log('in edit');
 			this.props.changeNav();
 		}
 	}
@@ -41,12 +45,15 @@ class AppContainer extends React.Component {
 	        	<div>
 			    	<NavbarContainer />
 					<Switch>
-						<Route path="/" exact render={() => <div className="page-wrapper frame">
-							<h1>Home page</h1>
-						</div>}/>
+						<Route exact
+							   path="/"
+							   render={() => <div className="page-wrapper frame">
+												<h1>Home page</h1>
+											</div>}/>
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>
 						<Route path="/edit" component={EditorContainer}/>
+						<Route path="/u/:username" render={(props) => <ProfileContainer {...props} />} />
 					</Switch>
 	    		</div>
         	</Router>

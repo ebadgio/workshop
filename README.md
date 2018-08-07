@@ -55,11 +55,25 @@ This will be a site for editing and sharing creative writing works such as short
     * ~Topic~
 
 ### User Account
-* Drafts
+* Profile page
+    * ~Pro pic~
+    * ~name, username, bio~
+    * stats
+    * works
+* Your Works page
     * Display a list of active drafts 
-* Works
-    * Display works
-    
+    * Display a list of published works
+
+### Navbar
+* logged in user dropdown
+    * tab: Profile
+    * tab: Your Works
+    * tab: Settings
+    * tab: logout
+
+### Issues
+* Session inconsistency
+* Server stuck when first laoded page is not base '/'
 
 ## Usage
 

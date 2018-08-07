@@ -14,7 +14,7 @@ const secret = process.env.SECRET;
 // MongoDB
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect(connect, { useNewUrlParser: true });
+mongoose.connect(connect);
 mongoose.Promise = global.Promise;
 
 // Mongoose models
@@ -32,12 +32,12 @@ app.use(express.static(buildPath));
 app.use(compress());
 
 app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({ limit: '5mb', extended: false }));
+app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
 // Create session
 app.use(session({
-    resave: false,
-    saveUninitialized: true,
+    // resave: false,
+    // saveUninitialized: true,
     secret: secret,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
@@ -104,8 +104,8 @@ app.use('/db', db);
 
 
 // frontend entry
-app.use('*', (req, res) => {
-	console.log('user', req.user);
+app.use('/', (req, res) => {
+	// console.log('user', req.user);
     res.sendFile(path.join(__dirname, '..', 'build/index.html'));
 });
 

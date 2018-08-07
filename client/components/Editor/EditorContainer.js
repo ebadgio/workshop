@@ -26,7 +26,12 @@ class EditorContainer extends React.Component {
 	}
 
 	componentDidMount() {
+		// Convert feather icons to svg 
 		window.feather.replace();
+	}
+
+	componentWillUnmount() {
+		this.props.closeEdit();
 	}
 
 	saveDraft(author, title, content, draftId) {
@@ -51,6 +56,7 @@ EditorContainer.propTypes = {
 	isSaving: PropTypes.bool,
 	saveSuccess: PropTypes.bool,
 	saveDraft: PropTypes.func,
+	closeEdit: PropTypes.func,
 	draftId: PropTypes.string
 };
 
@@ -63,7 +69,9 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-	saveDraft: (author, title, content, draftId) => dispatch(saveDraftThunk(author, title, content, draftId)) 
+	saveDraft: (author, title, content, draftId) =>
+							dispatch(saveDraftThunk(author, title, content, draftId)),
+	closeEdit: () => dispatch({type: 'CLOSE_EDIT'})
 });
 
 

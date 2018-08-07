@@ -5,6 +5,10 @@ const draftSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    authorUsername: {
+        type: String,
+        required: true
+    },
     content: {
         type: String,
         required: true
@@ -13,6 +17,9 @@ const draftSchema = new mongoose.Schema({
         type: String,
         default: 'Untitled'
     },
+},
+{
+    timestamps: true
 });
 
 
