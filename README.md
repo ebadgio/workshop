@@ -78,7 +78,7 @@ This will be a site for editing and sharing creative writing works such as short
 ## Usage
 
   1. **Clone Repsository**
-      * Clone repository, enter package (```cd workshop-web/```) from command line, and continue with the next steps.
+      * Clone repository, enter package (```cd workshop/```) from command line, and continue with the next steps.
   2. **Install dependencies:**
       * Command: ```npm install```
   3. **Run Webpack**
