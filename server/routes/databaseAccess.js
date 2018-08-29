@@ -70,7 +70,7 @@ router.post('/save/draft', (req, res) => {
             authorUsername: req.body.author.username,
             content: req.body.content,
             title: req.body.title
-        })
+        });
         
         // Save draft and return promise
         return draft.save()
@@ -88,40 +88,26 @@ router.post('/save/draft', (req, res) => {
     }
 });
 
-router.get('/user/works/:userId', (req,res) => {
+router.get('/fetch/drafts/:userId', (req,res) => {
 
-    console.log('hit user works');
+    console.log('hit fetch user drafts');
 
     if (req.params.userId !== req.body.user._id.toString()) {
         return res.redirect('/');
     }
 
-    let sendDrafts;
-
     // Find 10 most recently updated drafts
-    Draft.find({"author": user._id})
+    Draft.find({"author": req.params.userId})
         .limit(10)
         .sort({"updatedAt": -1})
         .populate('author')
 
         .then((drafts) => {
-
-            // Store drafts for next step
-            sendDrafts = drafts;
-
-            // Find 10 most recently created works
-            return Work.find({"author": sendUser._id})
-                        .limit(10)
-                        .sort({"createdAt": -1})
-                        .populate('author')
-        })
-
-        .then((works) => {
-            return res.json({success: true, works: works, drafts: sendDrafts});
+            return res.json({success: true, drafts: drafts});
         })
 
         .catch((err) => {
-            console.log('fetch user works error', err);
+            console.log('fetch user drafts error', err);
             return res.json({success: false, error: err});
         });
 

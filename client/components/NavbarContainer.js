@@ -2,12 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {
-  Link
-} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 // Components
 import Button from './elements/Button';
+import {NavAvatar} from './elements/Avatar';
+import {Menu, MenuItem, MenuDivider} from "./elements/Menu";
+import Icon from './elements/Icon';
+
+'./elements/Menu';
 
 // Thunks
 import logoutUserThunk from "../thunks/logoutUserThunk";
@@ -28,6 +31,7 @@ class NavbarContainer extends React.Component {
 	}
 
 	componentDidMount() {
+
 		document.addEventListener('scroll', () => {
             if (window.scrollY === 0) {
                 this.base()
@@ -91,16 +95,30 @@ class NavbarContainer extends React.Component {
 							</Link>
 						</h2>
 						<div className="row nav-tabs">
-							<Link className="nav-link color-hover"
-									onClick={() => this.props.openEdit()}
-									to={'/edit'}>
-								edit
-							</Link>
-							<Link className="nav-link color-hover"
-								  to={'/u/' + this.state.user.username}>
-								  {this.state.user.username}
-							</Link>
-							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
+							{/*<Link className="nav-link color-hover"*/}
+									{/*onClick={() => this.props.openEdit()}*/}
+									{/*to={'/edit'}>*/}
+								{/*edit*/}
+							{/*</Link>*/}
+							{/*<Link className="nav-link color-hover"*/}
+								  {/*to={'/u/' + this.state.user.username}>*/}
+								  {/*{this.state.user.username}*/}
+							{/*</Link>*/}
+							<Menu trigger={<NavAvatar image={this.state.user.avatar}
+												   id={'nav-avatar'}/>}
+								  triggerId={'nav-avatar'}
+								  type="nav">
+								<MenuItem to={'/u/' + this.state.user.username}>
+                                    Profile
+								</MenuItem>
+								<MenuItem>Drafts</MenuItem>
+								<MenuDivider />
+                                <MenuItem action={() => this.props.logout()}>
+									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
+									Logout
+								</MenuItem>
+							</Menu>
+							{/*<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>*/}
 						</div>
 					</div>
 				</div>

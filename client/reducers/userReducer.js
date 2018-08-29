@@ -8,6 +8,11 @@ const userReducer = (state = {}, action) => {
 			return action.user;
         case 'USER_LOGOUT':
             return {};
+		case 'FETCH_DRAFTS':
+			return {
+				...state,
+				drafts: action.drafts
+			};
 		default:
 			return state;
 	}
