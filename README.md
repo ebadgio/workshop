@@ -62,14 +62,17 @@ This will be a site for editing and sharing creative writing works such as short
     * works
 * Your Works page
     * Display a list of active drafts 
+     * ~Drafts fetched from backend and populated on frontend~
+     * styled draft cards
     * Display a list of published works
 
 ### Navbar
 * logged in user dropdown
-    * tab: Profile
-    * tab: Your Works
+    * ~tab: Profile~
+    * ~tab: Your Works~
+    * ~tab: New Story~
     * tab: Settings
-    * tab: logout
+    * ~tab: logout~
 
 ### Issues
 * Session inconsistency
