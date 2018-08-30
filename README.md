@@ -65,6 +65,7 @@ This will be a site for editing and sharing creative writing works such as short
      * ~Drafts fetched from backend and populated on frontend~
      * styled draft cards
     * Display a list of published works
+    * ~Load draft into editor~
 
 ### Navbar
 * logged in user dropdown

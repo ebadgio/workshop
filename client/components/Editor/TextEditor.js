@@ -29,34 +29,46 @@ const initialValue = Value.fromJSON({
 })
 
 class TextEditor extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value: initialValue,
-      timeoutId: '',
-      saveState: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: initialValue,
+            loading: true,
+            timeoutId: '',
+            saveState: ''
+        };
 
-    this.onChange = this.onChange.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.renderMark = this.renderMark.bind(this);
-    this.updateMenu = this.updateMenu.bind(this);
-  }
+        this.onChange = this.onChange.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.renderMark = this.renderMark.bind(this);
+        this.updateMenu = this.updateMenu.bind(this);
 
-  componentDidMount() {
-    this.updateMenu()
-  }
-
-  componentDidUpdate() {
-    this.updateMenu()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // console.log('text editor', nextProps);
-    if (!nextProps.isSaving && nextProps.saveSuccess) {
-      this.setState({saveState: 'Saved'});
+    // setTimeout(() => this.setState({waiting: false}), 300)
     }
-  }
+
+    componentDidMount() {
+        let value = initialValue;
+
+        if (this.props.fromDraft) {
+            value = Value.fromJSON(JSON.parse(this.props.value));
+        }
+
+        // TODO: set title
+
+        this.setState({value: value, loading: false});
+        this.updateMenu()
+    }
+
+    componentDidUpdate() {
+        this.updateMenu()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('text editor', nextProps);
+        if (!nextProps.isSaving && nextProps.saveSuccess) {
+            this.setState({saveState: 'Saved'});
+        }
+    }
 
   /**
    * Update the menu's absolute position.
@@ -199,6 +211,10 @@ class TextEditor extends React.Component {
 
   // Render the editor.
   render() {
+    if (this.state.loading) {
+        return <div>Loading...</div>
+    }
+
     return (
       <div className="slate-editor box">
 

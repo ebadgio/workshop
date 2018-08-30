@@ -15,7 +15,10 @@ class EditorContainer extends React.Component {
 		this.state = {
 			user: props.user,
 			isSaving: props.isSaving,
-			saveSuccess: props.saveSucess
+			saveSuccess: props.saveSucess,
+            fromDraft: props.fromDraft,
+            draftId: props.draftId,
+            value: props.value
 		};
 		this.saveDraft = this.saveDraft.bind(this);
 	}
@@ -45,6 +48,8 @@ class EditorContainer extends React.Component {
 							isSaving={this.state.isSaving} 
 							saveSuccess={this.state.saveSuccess}
 							draftId={this.state.draftId}
+                            fromDraft={this.state.fromDraft}
+							value={this.state.value}
 							saveDraft={this.saveDraft}/>
 			</div>
 		);
@@ -57,14 +62,18 @@ EditorContainer.propTypes = {
 	saveSuccess: PropTypes.bool,
 	saveDraft: PropTypes.func,
 	closeEdit: PropTypes.func,
-	draftId: PropTypes.string
+	draftId: PropTypes.string,
+    fromDraft: PropTypes.bool,
+    value: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
 	user: state.userReducer,
 	isSaving: state.editReducer.isSaving,
 	saveSuccess: state.editReducer.saveSuccess,
-	draftId: state.editReducer.draftId
+	draftId: state.editReducer.draftId,
+    fromDraft: state.editReducer.fromDraft,
+    value: state.editReducer.value
 });
 
 

@@ -4,8 +4,13 @@ import styled from 'react-emotion';
 export const Row = styled('div')`
     display: flex;
 	align-items: center;
-	width: 100%
-`
+	width: 100%;
+	max-width: 100%;
+`;
+
+export const RowWrap = styled(Row)`
+    flex-wrap: wrap;
+`;
 
 export const RowApart = styled(Row)`
     justify-content: apart;
@@ -18,6 +23,6 @@ export const Column = styled('div')`
 `;
 
 export const ColumnCenter = styled(Column)`
-    align-items: center
+    align-items: center;
 `;
 
