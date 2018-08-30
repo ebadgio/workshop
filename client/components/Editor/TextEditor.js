@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import HoverMenu from './HoverMenu';
-import Avatar from '../elements/Avatar';
+import {Avatar} from '../modules/Avatar';
 
 const initialValue = Value.fromJSON({
   document: {

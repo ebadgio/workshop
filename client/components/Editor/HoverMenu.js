@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 // Components
 import ToolBar from './ToolBar';
-import Button from '../elements/Button';
-import Icon from '../elements/Icon';
+import Button from '../modules/Button';
+import Icon from '../modules/Icon';
 
 class HoverMenu extends React.Component {
 

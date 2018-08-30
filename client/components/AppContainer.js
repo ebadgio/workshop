@@ -12,9 +12,10 @@ import RegisterContainer from './Auth/RegisterContainer';
 import LoginContainer from './Auth/LoginContainer';
 import NavbarContainer from './NavbarContainer';
 import ProfileContainer from './Profile/ProfileContainer';
+import MyWorksContainer from "./Works/MyWorksContainer";
 
 // Components
-import Icon from './elements/Icon';
+import Icon from './modules/Icon';
 
 // Thunks 
 import fetchUserThunk from '../thunks/fetchUserThunk';
@@ -53,6 +54,7 @@ class AppContainer extends React.Component {
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>
 						<Route path="/edit" component={EditorContainer}/>
+						<Route path="/my/works" component={MyWorksContainer}/>
 						<Route path="/u/:username" render={(props) => <ProfileContainer {...props} />} />
 					</Switch>
 	    		</div>

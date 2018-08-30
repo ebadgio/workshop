@@ -1,4 +1,4 @@
-
+// TODO: concatanate works and drafts
 const userReducer = (state = {}, action) => {
 
 	switch (action.type) {
@@ -8,9 +8,10 @@ const userReducer = (state = {}, action) => {
 			return action.user;
         case 'USER_LOGOUT':
             return {};
-		case 'FETCH_DRAFTS':
+		case 'USER_WORKS_FETCH':
 			return {
 				...state,
+				works: action.works,
 				drafts: action.drafts
 			};
 		default:

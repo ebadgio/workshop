@@ -88,13 +88,17 @@ router.post('/save/draft', (req, res) => {
     }
 });
 
-router.get('/fetch/drafts/:userId', (req,res) => {
+router.get('/fetch/works/:userId', (req,res) => {
+
+    // TODO: paginate drafts and works with query parameters
 
     console.log('hit fetch user drafts');
 
-    if (req.params.userId !== req.body.user._id.toString()) {
+    if (req.params.userId !== req.user._id.toString()) {
         return res.redirect('/');
     }
+
+    let sendDrafts;
 
     // Find 10 most recently updated drafts
     Draft.find({"author": req.params.userId})
@@ -103,7 +107,15 @@ router.get('/fetch/drafts/:userId', (req,res) => {
         .populate('author')
 
         .then((drafts) => {
-            return res.json({success: true, drafts: drafts});
+            sendDrafts = drafts;
+            return Work.find({"author": req.params._id})
+                .limit(10)
+                .sort({"createdAt": -1})
+                .populate('author')
+        })
+
+        .then((works) => {
+            return res.json({success: true, drafts: sendDrafts, works: works});
         })
 
         .catch((err) => {

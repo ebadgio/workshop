@@ -20,7 +20,7 @@ const MenuWrapper = styled('div')`
 
 const MenuWrapperNav = styled(MenuWrapper)`
     top: 55px;
-    right: 20px;
+    right: 40px;
 `;
 
 
@@ -73,16 +73,20 @@ export class Menu extends React.Component {
 
     openMenu(event) {
         event.preventDefault();
-        console.log('clicked');
+        // console.log('clicked');
         this.setState({ showMenu: true }, () => {
-            setTimeout(() => {
-                window.feather.replace();
-                document.addEventListener('click', this.closeMenu)
-            }, 150);
+            window.feather.replace();
+            document.addEventListener('click', this.closeMenu)
         });
     }
       
-    closeMenu() {
+    closeMenu(event) {
+        event.preventDefault();
+        // console.log('closed');
+        if (this.triggerRef.contains(event.target)) {
+            return;
+        }
+
         this.setState({ showMenu: false }, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -94,7 +98,11 @@ export class Menu extends React.Component {
             case "nav":
                 return (
                     <div>
-                        {this.props.trigger}
+                        <div ref={(element) => {
+                            this.triggerRef = element;
+                        }}>
+                            {this.props.trigger}
+                        </div>
 
                         {this.state.showMenu
                             ?
@@ -109,7 +117,11 @@ export class Menu extends React.Component {
             default:
                 return (
                     <div>
-                        {this.props.trigger}
+                        <div ref={(element) => {
+                            this.triggerRef = element;
+                            }}>
+                            {this.props.trigger}
+                        </div>
 
                         {this.state.showMenu
                             ?

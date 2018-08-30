@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 
 // Components
-import Button from './elements/Button';
-import {NavAvatar} from './elements/Avatar';
-import {Menu, MenuItem, MenuDivider} from "./elements/Menu";
-import Icon from './elements/Icon';
+import Button from './modules/Button';
+import {NavAvatar} from './modules/Avatar';
+import {Menu, MenuItem, MenuDivider} from "./modules/Menu";
+import Icon from './modules/Icon';
 
-'./elements/Menu';
+
 
 // Thunks
 import logoutUserThunk from "../thunks/logoutUserThunk";
@@ -105,13 +105,14 @@ class NavbarContainer extends React.Component {
 								  {/*{this.state.user.username}*/}
 							{/*</Link>*/}
 							<Menu trigger={<NavAvatar image={this.state.user.avatar}
-												   id={'nav-avatar'}/>}
+                                                      id={'nav-avatar'}/>}
 								  triggerId={'nav-avatar'}
 								  type="nav">
 								<MenuItem to={'/u/' + this.state.user.username}>
                                     Profile
 								</MenuItem>
-								<MenuItem>Drafts</MenuItem>
+								<MenuItem to={'/my/works'}>Your Works</MenuItem>
+                                <MenuItem to={'/edit'}>New Work</MenuItem>
 								<MenuDivider />
                                 <MenuItem action={() => this.props.logout()}>
 									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
