@@ -1,4 +1,4 @@
-# workshop-web
+# workshop
 This will be a site for editing and sharing creative writing works such as short stories, poems, screenplays, personal essays, etc. It will be designed in a way similar to Medium, where you can create the works inside the site with a rich text editor, and save them there. Then you can also read and discover other people's works, add comments, and also follow users.
 
 **Technologies used**
@@ -46,7 +46,8 @@ This will be a site for editing and sharing creative writing works such as short
     * ~Title input~
 * functionality
     * ~Autosave draft while editing~
-    * Load draft into editor
+    * ~Load draft into editor~
+    * Integrate moment.js
     * Publish
 * mongo models
     * ~Draft~
@@ -61,9 +62,9 @@ This will be a site for editing and sharing creative writing works such as short
     * stats
     * works
 * Your Works page
-    * Display a list of active drafts 
+    * ~Display a list of active drafts ~
      * ~Drafts fetched from backend and populated on frontend~
-     * styled draft cards
+     * ~styled draft cards~
     * Display a list of published works
     * ~Load draft into editor~
 
@@ -74,10 +75,12 @@ This will be a site for editing and sharing creative writing works such as short
     * ~tab: New Story~
     * tab: Settings
     * ~tab: logout~
+    
+
 
 ### Issues
 * Session inconsistency
-* Server stuck when first laoded page is not base '/'
+* ~Server stuck when first laoded page is not base '/'~
 
 ## Usage
 
