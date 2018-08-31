@@ -1,7 +1,10 @@
 // TODO: concatanate works and drafts
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {
+    fetching: true,
+}, action) => {
 
 	switch (action.type) {
+		// case 'FETCHING_USER':
 		case 'USER_LOGIN':
 		case 'USER_REGISTER':
 		case 'USER_FETCH':

@@ -16,12 +16,12 @@ import Icon from './modules/Icon';
 import logoutUserThunk from "../thunks/logoutUserThunk";
 
 class NavbarContainer extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			scrolled: false,
 			isEditing: false,
-			user: {}
+			user: props.user
 		}
 	}
 

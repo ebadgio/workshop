@@ -2,6 +2,7 @@ import axios from 'axios';
 import URL from '../../info';
 
 const fetchUserThunk = () => (dispatch) => {
+    dispatch({type: 'FETCHING_USER'});
     console.log('called fetch');
     axios.get(URL +'db/fetch/user')
         .then((res) => {

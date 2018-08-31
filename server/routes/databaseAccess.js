@@ -15,7 +15,7 @@ router.get('/fetch/user', (req, res) => {
         return res.json({success: true, user: req.user});
     }
      
-    return res.json({success: false});
+    return res.json({success: true, user: {}});
 });
 
 router.post('/save/draft', (req, res) => {

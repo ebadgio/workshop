@@ -16,14 +16,17 @@ import MyWorksContainer from "./Works/MyWorksContainer";
 
 // Components
 import Icon from './modules/Icon';
+import {PageWrapper} from "./elements";
 
 // Thunks 
 import fetchUserThunk from '../thunks/fetchUserThunk';
 
 class AppContainer extends React.Component {
-	constructor() {
-		super();
-		this.state = {}
+	constructor(props) {
+		super(props);
+		this.state = {
+			user: props.user
+		}
 	}
 
 	componentWillMount() {
@@ -40,7 +43,20 @@ class AppContainer extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({user: nextProps.user})
+	}
+
 	render() {
+
+		if (this.state.user.fetching) {
+			console.log('fetching');
+			return (
+				<PageWrapper>
+				</PageWrapper>
+			);
+		}
+
 		return(
 			<Router history={history}>
 	        	<div>
@@ -66,7 +82,8 @@ class AppContainer extends React.Component {
 
 AppContainer.propTypes = {
 	fetchUser: PropTypes.func,
-	changeNav: PropTypes.func
+	changeNav: PropTypes.func,
+	user: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
