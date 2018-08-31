@@ -5,7 +5,9 @@ import profileReducer from '../../reducers/profileReducer';
 export const ProfileWrapper = styled('div')`
     width: 800px;
     max-width: 100%;
-    margin-top: 100px;
+    margin-top: 80px;
+    box-sizing: border-box;
+    padding: 0 10px;
 `;
 
 export const ProfileInfo = (props) => {

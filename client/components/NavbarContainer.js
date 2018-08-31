@@ -58,33 +58,6 @@ class NavbarContainer extends React.Component {
 
 	render() {
 
-		if (this.state.isEditing) {
-			return (
-				<div className="nav frame" id="nav">
-					<div className="nav-content row-apart">
-						<h2>
-							<Link to="/">
-								Workshop
-							</Link>
-						</h2>
-						<div className="row nav-tabs">
-							<div className="nav-link color-hover">
-								Save for later
-							</div>
-							<div className="nav-link color-hover">
-								Publish
-							</div>
-							<Link className="nav-link color-hover"
-								  to={'/u/' + this.state.user.username}>
-								  {this.state.user.username}
-							</Link>
-							<div className="nav-link color-hover" onClick={() => this.props.logout()}>Logout</div>
-						</div>
-					</div>
-				</div>
-			);
-		}
-
 		if (this.state.user.username) {
 			return (
 				<div className="nav frame" id="nav">
@@ -95,15 +68,6 @@ class NavbarContainer extends React.Component {
 							</Link>
 						</h2>
 						<div className="row nav-tabs">
-							{/*<Link className="nav-link color-hover"*/}
-									{/*onClick={() => this.props.openEdit()}*/}
-									{/*to={'/edit'}>*/}
-								{/*edit*/}
-							{/*</Link>*/}
-							{/*<Link className="nav-link color-hover"*/}
-								  {/*to={'/u/' + this.state.user.username}>*/}
-								  {/*{this.state.user.username}*/}
-							{/*</Link>*/}
 							<Menu trigger={<NavAvatar image={this.state.user.avatar}
                                                       id={'nav-avatar'}/>}
 								  triggerId={'nav-avatar'}
@@ -112,7 +76,7 @@ class NavbarContainer extends React.Component {
                                     Profile
 								</MenuItem>
 								<MenuItem to={'/my/works'}>Your Works</MenuItem>
-                                <MenuItem to={'/edit'}>New Work</MenuItem>
+                                <MenuItem to={'/new/draft'}>New Work</MenuItem>
 								<MenuDivider />
                                 <MenuItem action={() => this.props.logout()}>
 									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
@@ -125,7 +89,6 @@ class NavbarContainer extends React.Component {
 				</div>
 			);
 		}
-
 		
 		return(
 			<div className="nav frame" id="nav">

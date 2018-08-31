@@ -26,3 +26,11 @@ export const ColumnCenter = styled(Column)`
     align-items: center;
 `;
 
+export const PageWrapper = styled('div')`
+        width: 100%;
+        padding-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+`;
+

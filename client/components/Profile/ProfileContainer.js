@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-import {ProfileWrapper, ProfileInfo} from './ProfileComponents';
+import {ProfileWrapper, ProfileInfo} from './components';
 
 // Thunks
 import fetchProfileItemsThunk from '../../thunks/fetchProfileItemsThunk';

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {Redirect} from 'react-router-dom';
+
 // Components
 import TextEditor from '../Editor/TextEditor';
 
@@ -15,22 +17,17 @@ class EditorContainer extends React.Component {
 		this.state = {
 			user: props.user,
 			isSaving: props.isSaving,
-			saveSuccess: props.saveSucess,
+			saveSuccess: props.saveSuccess,
             fromDraft: props.fromDraft,
             draftId: props.draftId,
-            value: props.value
+            value: props.value,
+            title: props.title
 		};
 		this.saveDraft = this.saveDraft.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log('editor container', nextProps);
 		this.setState(nextProps);
-	}
-
-	componentDidMount() {
-		// Convert feather icons to svg 
-		window.feather.replace();
 	}
 
 	componentWillUnmount() {
@@ -42,6 +39,11 @@ class EditorContainer extends React.Component {
 	}
 
 	render() {
+
+	    if (!this.props.user._id) {
+	        return <Redirect to="/"/>
+        }
+
 		return(
 			<div className="page-wrapper frame">
 				<TextEditor user={this.state.user}
@@ -50,6 +52,7 @@ class EditorContainer extends React.Component {
 							draftId={this.state.draftId}
                             fromDraft={this.state.fromDraft}
 							value={this.state.value}
+							title={this.state.title}
 							saveDraft={this.saveDraft}/>
 			</div>
 		);
@@ -64,6 +67,7 @@ EditorContainer.propTypes = {
 	closeEdit: PropTypes.func,
 	draftId: PropTypes.string,
     fromDraft: PropTypes.bool,
+    title: PropTypes.string,
     value: PropTypes.string
 };
 
@@ -73,6 +77,7 @@ const mapStateToProps = (state) => ({
 	saveSuccess: state.editReducer.saveSuccess,
 	draftId: state.editReducer.draftId,
     fromDraft: state.editReducer.fromDraft,
+    title: state.editReducer.title,
     value: state.editReducer.value
 });
 

@@ -53,7 +53,7 @@ class AppContainer extends React.Component {
 											</div>}/>
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>
-						<Route path="/edit" component={EditorContainer}/>
+						<Route path="/new/draft" component={EditorContainer}/>
 						<Route path="/edit/draft/:id" component={EditorContainer}/>
 						<Route path="/my/works" component={MyWorksContainer}/>
 						<Route path="/u/:username" render={(props) => <ProfileContainer {...props} />} />
