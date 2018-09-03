@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 // Components
 import HoverMenu from './HoverMenu';
 import {Avatar} from '../modules/Avatar';
+import {ButtonOutlinePrimary} from "../modules/Button";
+import Icon from "../modules/Icon";
+
+//Containers
+import PublishContainer from './PublishContainer';
 
 const initialValue = Value.fromJSON({
   document: {
@@ -191,25 +196,25 @@ class TextEditor extends React.Component {
 
     // Add a `renderMark` method to render marks.
     renderMark(props) {
-    switch (props.mark.type) {
-        case 'bold':
-            return <strong>{props.children}</strong>;
-        case 'italic':
-            return <em>{props.children}</em>;
-        case 'underline':
-            return <u>{props.children}</u>;
-        case 'title':
-            return <h2>{props.children}</h2>;
-        case 'subtitle':
-            return <h3>{props.children}</h3>;
-        case 'left':
-            return <div style={{textAlign: 'left'}}>{props.children}</div>;
-        case 'right':
-            return <div style={{textAlign: 'right'}}>{props.children}</div>;
-        case 'center':
-            return <div style={{textAlign: 'center'}}>{props.children}</div>;
-        default:
-            return <span>{props.children}</span>
+        switch (props.mark.type) {
+            case 'bold':
+                return <strong>{props.children}</strong>;
+            case 'italic':
+                return <em>{props.children}</em>;
+            case 'underline':
+                return <u>{props.children}</u>;
+            case 'title':
+                return <h2>{props.children}</h2>;
+            case 'subtitle':
+                return <h3>{props.children}</h3>;
+            case 'left':
+                return <div style={{textAlign: 'left'}}>{props.children}</div>;
+            case 'right':
+                return <div style={{textAlign: 'right'}}>{props.children}</div>;
+            case 'center':
+                return <div style={{textAlign: 'center'}}>{props.children}</div>;
+            default:
+                return <span>{props.children}</span>
         }
     }
 
@@ -230,11 +235,16 @@ class TextEditor extends React.Component {
                 <div className="w-fill row">
                     <Avatar image={this.props.user.avatar}/>
                     <div className="faint-text main-font col fs-14" style={{alignSelf: 'baseline'}}>
-                    <span className="weak-text">{this.props.user.fullname}</span>
-                    {this.state.saveState ?
-                       <span>Draft &bull; <span>{this.state.saveState}</span></span> :
-                       <span>Draft</span>}
+                        <span className="weak-text">{this.props.user.fullname}</span>
+                        {this.state.saveState ?
+                           <span>Draft &bull; <span>{this.state.saveState}</span></span> :
+                           <span>Draft</span>}
                     </div>
+                    <ButtonOutlinePrimary style={{marginLeft: 'auto'}} id="open-modal-publish">
+                        <Icon name={'plus'}
+                              style={{width: '20px', height: '20px', marginRight: '5px', marginBottom: '2px'}}/>
+                        Publish
+                    </ButtonOutlinePrimary>
                 </div>
 
                 <div className="w-fill frame">
@@ -244,6 +254,8 @@ class TextEditor extends React.Component {
                            value={this.state.titleVal}
                            onChange={(e) => this.changeTitle(e)} />
                 </div>
+
+                <PublishContainer />
 
                 <Editor value={this.state.value}
                         onChange={this.onChange}

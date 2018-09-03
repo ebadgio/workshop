@@ -13,6 +13,8 @@ const Button = styled('div')`
     justify-content: center;
     -webkit-transition: color .35s ease, background .35s ease;
 	transition: color .35s ease, background .35s ease;
+	font-size: 16px;
+	font-family: sans-serif;
 `;
 
 const ButtonOutline = styled(Button)`
@@ -32,6 +34,29 @@ export const ButtonPrimary = styled(Button)`
     &:hover {
         background: #5870cb
     }
+`;
+
+export const ButtonToolbar = styled(Button)`
+    border-radius: 0;
+	margin: 0;
+	color: ${props => props.active ? "#fff" : "#757575"};
+	height: 100%;
+    padding: 0 7px;
+    display: inline-block;
+    &:hover {
+        color: #fff;
+    }
+`;
+
+export const ButtonIcon = styled(Button)`
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    color: #757575;
+    &:hover {
+        color: #424242;
+        background: rgba(0,0,0,.2);
+    }  
 `;
 
 // const Button = ({type, style, contents, action, active}) => {

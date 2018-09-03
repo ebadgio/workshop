@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
 
-const MenuWrapper = styled('div')`
+export const MenuWrapper = styled('div')`
     width: 200px;
     background: #fff;
     display: flex;

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 // Components
 import ToolBar from './ToolBar';
-import Button from '../modules/Button';
+import {ButtonToolbar} from '../modules/Button';
 import Icon from '../modules/Icon';
 
 class HoverMenu extends React.Component {
@@ -37,11 +37,11 @@ class HoverMenu extends React.Component {
         const { value } = this.props;
         const isActive = value.activeMarks.some(mark => mark.type === type);
         return (
-            <Button
-                type={"toolbar"}
+            <ButtonToolbar
                 active={isActive}
-                action={event => this.onClickMark(event, type)}
-                contents={<Icon name={icon} style={iconStyle} />}/>
+                onPointerDown={event => this.onClickMark(event, type)}>
+                <Icon name={icon} style={iconStyle} />
+            </ButtonToolbar>
         )
     }
 

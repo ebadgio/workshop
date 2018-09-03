@@ -111,6 +111,10 @@ a {
 	margin-top: 10px;
 }
 
+.ml-auto {
+	margin-left: auto;
+}
+
 @keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }

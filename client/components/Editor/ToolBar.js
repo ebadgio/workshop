@@ -5,7 +5,7 @@ const Menu = styled('div')`
   & > * {
     display: inline-block;
   }
-`
+`;
 
 const ToolBar = styled(Menu)`
   padding: 8px 7px 6px;
@@ -18,6 +18,6 @@ const ToolBar = styled(Menu)`
   background-color: #222;
   border-radius: 4px;
   transition: opacity 0.5s;
-`
+`;
 
 export default ToolBar

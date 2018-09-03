@@ -16,8 +16,9 @@ import ProfileContainer from './Profile/ProfileContainer';
 import MyWorksContainer from "./Works/MyWorksContainer";
 
 // Components
-import Icon from './modules/Icon';
+//import Icon from './modules/Icon';
 import {PageWrapper} from "./elements";
+import {Select} from "./modules/Select";
 
 // Thunks 
 import fetchUserThunk from '../thunks/fetchUserThunk';
@@ -77,6 +78,13 @@ class AppContainer extends React.Component {
 							   path="/"
 							   render={() => <div className="page-wrapper frame">
 												<h1>Home page</h1>
+								   				<div>
+                                                    <Select placeholder="Type"
+                                                            sId={'s-test'}
+                                                            dId={'d-test'}
+                                                            options={[{text: 'option 1'}, {text: 'option 2'}, {text: 'option 3'}]}>
+                                                    </Select>
+												</div>
 											</div>}/>
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>
