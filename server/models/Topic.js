@@ -5,7 +5,7 @@ const topicSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    similarTopics: [
+    similar: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Topic'

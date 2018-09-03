@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import TextInput from '../modules/TextInput';
-import Button from '../modules/Button';
+import {ButtonPrimary} from '../modules/Button';
 
 // Thunks
 import registerThunk from '../../thunks/registerThunk';
@@ -40,7 +40,10 @@ class RegisterContainer extends React.Component {
 					<TextInput placeholder="Email" id="register-email"/>
 					<TextInput placeholder="Password" password id="register-password"/>
 					<TextInput placeholder="Confirm password" password id="register-password-confirm"/>
-					<Button type="primary" style={{marginLeft: 'auto'}} action={() => this.registerUser()} contents="Submit"/>
+					<ButtonPrimary style={{marginLeft: 'auto'}}
+                                   onPointerDown={() => this.registerUser()}>
+                        Sign up
+                    </ButtonPrimary>
 				</div>
 			</div>
 		);

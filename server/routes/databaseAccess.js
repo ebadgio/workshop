@@ -5,9 +5,11 @@ const router = express.Router();
 const User = require('../models/User');
 const Draft = require('../models/Draft');
 const Work = require('../models/Work');
+const Type = require('../models/Type');
+const Topic = require('../models/Topic');
 
 // Utils
-const Utils = require('../utils')
+const Utils = require('../utils');
 const generateError = Utils.generateError;
 
 router.get('/fetch/user', (req, res) => {
@@ -23,7 +25,7 @@ router.post('/save/draft', (req, res) => {
     console.log('hit save draft', req.body);
 
     // If no user in session send back to home page
-    if (!req.user) return res.redirect('/')
+    if (!req.user) return res.redirect('/');
 
     if (req.body.draftId) {
 

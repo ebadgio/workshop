@@ -23,7 +23,7 @@ const DraftCardFrame = styled(Column)`
 export const DraftCard = (props) => {
     return (
         <DraftCardFrame onClick={props.onClick} className="color-hover">
-                <h3 className="mb-20">{props.title}</h3>
+                <h3 className="mb-20" style={{color: '#424242'}}>{props.title}</h3>
                 <span className="faint-text">
                     Lasted edited {props.updatedAt} days ago
                 </span>

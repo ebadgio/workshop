@@ -6,4 +6,4 @@ const generateError = (name) => {
 
 module.exports = {
     generateError: generateError
-}
+};

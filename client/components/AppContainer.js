@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import * as moment from 'moment';
 
 // React Router
 import { Router, Route, Switch } from 'react-router-dom';
@@ -46,6 +47,16 @@ class AppContainer extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		this.setState({user: nextProps.user})
 	}
+    //
+	// componentDidMount() {
+	//     const map = {0:'01', 1: '01', 2:'01', 3: '03', 4:'04', 5: '06', 6: '07', 7:'08',  8: '09', 9: '10', 10: '11', 11: '12'}
+    //
+	//     const dateObj = new Date();
+    //
+     //    const date = dateObj.
+     //    const time = new Date().toTimeString()[0];
+	// 	console.log(moment());
+	// }
 
 	render() {
 

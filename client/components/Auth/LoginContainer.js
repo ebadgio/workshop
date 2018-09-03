@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import TextInput from '../modules/TextInput';
-import Button from '../modules/Button';
+import {ButtonPrimary} from '../modules/Button';
 
 // Thunks
 import loginThunk from '../../thunks/loginThunk';
@@ -31,10 +31,11 @@ class LoginContainer extends React.Component {
 					</div>
 					<TextInput placeholder="Email" id="login-username" />
 					<TextInput placeholder="Password" id="login-password" password />
-					<Button type="primary"
+					<ButtonPrimary
 							style={{marginLeft: 'auto'}}
-							action={() => this.loginUser()} 
-							contents="Sign In"/>
+							onPointerDown={() => this.loginUser()}>
+						Sign in
+					</ButtonPrimary>
 				</div>
 			</div>
 		);

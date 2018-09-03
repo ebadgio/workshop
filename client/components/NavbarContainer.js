@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 
 // Components
-import Button from './modules/Button';
+import {ButtonOutlinePrimary} from './modules/Button';
 import {NavAvatar} from './modules/Avatar';
 import {Menu, MenuItem, MenuDivider} from "./modules/Menu";
 import Icon from './modules/Icon';
@@ -105,7 +105,9 @@ class NavbarContainer extends React.Component {
 						</Link>
 						<Link className="nav-link"
 								to={'/register'}>
-							<Button type="outline-grey" contents="Get started"/>
+							<ButtonOutlinePrimary>
+								Get started
+							</ButtonOutlinePrimary>
 						</Link>
 					</div>
 				</div>
