@@ -75,7 +75,16 @@ This will be a site for editing and sharing creative writing works such as short
     * ~tab: New Story~
     * tab: Settings
     * ~tab: logout~
-    
+
+### Publish Work
+* ~Publish Button~
+* ~Modal~
+* Select type
+    * ~Select element ui~
+    * Populate with types from db
+* Select topics
+
+
 
 
 ### Issues
