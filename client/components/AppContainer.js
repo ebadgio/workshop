@@ -78,13 +78,6 @@ class AppContainer extends React.Component {
 							   path="/"
 							   render={() => <div className="page-wrapper frame">
 												<h1>Home page</h1>
-								   				<div>
-                                                    <Select placeholder="Type"
-                                                            sId={'s-test'}
-                                                            dId={'d-test'}
-                                                            options={[{text: 'option 1'}, {text: 'option 2'}, {text: 'option 3'}]}>
-                                                    </Select>
-												</div>
 											</div>}/>
 						<Route path="/login" component={LoginContainer}/>
 						<Route path="/register" component={RegisterContainer}/>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-import TextInput from '../modules/TextInput';
+import {FlatInput} from '../modules/TextInput';
 import {ButtonPrimary} from '../modules/Button';
 
 // Thunks
@@ -34,12 +34,12 @@ class RegisterContainer extends React.Component {
 					<div className="w-fill">
 						<h2>Register</h2>
 					</div>
-					<TextInput placeholder="Username" id="register-username" />
-					<TextInput placeholder="First Name" id="register-fname"/>
-					<TextInput placeholder="Last Name" id="register-lname"/>
-					<TextInput placeholder="Email" id="register-email"/>
-					<TextInput placeholder="Password" password id="register-password"/>
-					<TextInput placeholder="Confirm password" password id="register-password-confirm"/>
+					<FlatInput placeholder="Username" id="register-username" type="text"/>
+					<FlattInput placeholder="First Name" id="register-fname"type="text"/>
+					<FlatInput placeholder="Last Name" id="register-lname" type="text"/>
+					<FlatInput placeholder="Email" id="register-email" name="email" type="text"/>
+					<FlatInput placeholder="Password" password id="register-password" type="text"/>
+					<FlatInput placeholder="Confirm password" password id="register-password-confirm" type="text"/>
 					<ButtonPrimary style={{marginLeft: 'auto'}}
                                    onPointerDown={() => this.registerUser()}>
                         Sign up

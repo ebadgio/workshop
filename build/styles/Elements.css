@@ -60,3 +60,14 @@
 input:focus, textarea:focus, select:focus {
 	outline: none !important;
 }
+
+.selected-icon {
+    height: 15px;
+    width: 15px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.selected-icon:hover {
+    color: #212121;
+}

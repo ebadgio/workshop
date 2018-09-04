@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
+import {Divider} from "../elements";
 
 export const MenuWrapper = styled('div')`
     width: 200px;
@@ -44,12 +45,6 @@ export const MenuItem = (props) => <MenuItemStyle className="color-hover"
                                                   to={props.to ? props.to : '/#'}>
     {props.children}
 </MenuItemStyle>;
-
-export const MenuDivider = styled('div')`
-    width: 100%;
-    border-top: 1px solid #e9e9e9;
-    margin: 10px 0;
-`;
 
 export class Menu extends React.Component {
     constructor(props) {

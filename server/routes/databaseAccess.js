@@ -22,7 +22,7 @@ router.get('/fetch/user', (req, res) => {
 
 router.post('/save/draft', (req, res) => {
 
-    console.log('hit save draft', req.body);
+    // console.log('hit save draft', req.body);
 
     // If no user in session send back to home page
     if (!req.user) return res.redirect('/');
@@ -94,7 +94,7 @@ router.get('/fetch/works/:userId', (req,res) => {
 
     // TODO: paginate drafts and works with query parameters
 
-    console.log('hit fetch user drafts');
+    // console.log('hit fetch user drafts');
 
     if (req.params.userId !== req.user._id.toString()) {
         return res.redirect('/');
@@ -130,7 +130,7 @@ router.get('/fetch/works/:userId', (req,res) => {
 
 router.get('/fetch/profile/items/:username', (req, res) => {
 
-    console.log('hit fetch items', req.body, req.query);
+    // console.log('hit fetch items', req.body, req.query);
 
     let sendUser;
     let sendDrafts;
@@ -166,5 +166,17 @@ router.get('/fetch/profile/items/:username', (req, res) => {
 
 
 });
+
+router.get('/fetch/types', (req, res) => {
+    Type.find()
+        .then((types) => {
+            return res.json({success: true, types: types})
+        })
+
+        .catch((err) => {
+            return res.json({success: false, err: err})
+        })
+});
+
 
 module.exports = router;

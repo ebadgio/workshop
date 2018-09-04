@@ -5,7 +5,6 @@ export const Row = styled('div')`
     display: flex;
 	align-items: center;
 	width: 100%;
-	max-width: 100%;
 `;
 
 export const RowWrap = styled(Row)`
@@ -33,4 +32,21 @@ export const PageWrapper = styled('div')`
         justify-content: center;
         align-items: center;
 `;
+
+export const Divider = styled('div')`
+    width: 100%;
+    border-top: 1px solid #e9e9e9;
+    margin: 10px 0;
+`;
+
+export const Frame = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Text = styled('p')`
+    font-size: 16px;
+    color: #424242;
+`
 

@@ -7,9 +7,9 @@ import {Link} from 'react-router-dom'
 // Components
 import {ButtonOutlinePrimary} from './modules/Button';
 import {NavAvatar} from './modules/Avatar';
-import {Menu, MenuItem, MenuDivider} from "./modules/Menu";
+import {Menu, MenuItem} from "./modules/Menu";
 import Icon from './modules/Icon';
-
+import {Divider} from "./elements";
 
 
 // Thunks
@@ -77,7 +77,7 @@ class NavbarContainer extends React.Component {
 								</MenuItem>
 								<MenuItem to={'/my/works'}>Your Works</MenuItem>
                                 <MenuItem to={'/new/draft'}>New Work</MenuItem>
-								<MenuDivider />
+								<Divider />
                                 <MenuItem action={() => this.props.logout()}>
 									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
 									Logout

@@ -5,7 +5,8 @@ const editReducer = (state = {isEditing: false,
     fromDraft: false,
     draftId: '',
     title: '',
-    value: ''
+    value: '',
+    types: []
 }, action) => {
 
 	switch (action.type) {
@@ -16,32 +17,34 @@ const editReducer = (state = {isEditing: false,
 				draftId: action.draftId,
                 fromDraft: action.fromDraft,
                 title: action.title,
-                value: action.value
+                value: action.value,
+                types: state.types
 			};
-		case 'CLOSE_EDIT':
+        case 'CLOSE_EDIT':
 			return {
+                ...state,
 				isSaving: false,
 				isEditing: false
 			};
         case 'START_SAVING':
 			return {
+                ...state,
 				isSaving: true,
 				isEditing: true,
-				draftId: state.draftId,
-                fromDraft: state.fromDraft,
-				title: state.title,
-                value: state.value
 			};
         case 'DONE_SAVING':
 			return {
+                ...state,
 				isSaving: false,
 				isEditing: true,
 				saveSuccess: action.saveSuccess,
-                value: state.value,
-                fromDraft: state.fromDraft,
-                title: state.title,
 				draftId: action.draftId
 			};
+        case 'FETCH_TYPES':
+            return {
+                ...state,
+                types: action.types
+            };
         // case 'LOAD_DRAFT':
         //     return {
         //

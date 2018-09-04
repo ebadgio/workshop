@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-import TextInput from '../modules/TextInput';
+import {FlatInput} from '../modules/TextInput';
 import {ButtonPrimary} from '../modules/Button';
 
 // Thunks
@@ -29,8 +29,8 @@ class LoginContainer extends React.Component {
 					<div className="w-fill">
 						<h2>Login</h2>
 					</div>
-					<TextInput placeholder="Email" id="login-username" />
-					<TextInput placeholder="Password" id="login-password" password />
+					<FlatInput placeholder="Email" id="login-username" name="email" type="text" />
+					<FlatInput placeholder="Password" id="login-password" type="password" name="password" />
 					<ButtonPrimary
 							style={{marginLeft: 'auto'}}
 							onPointerDown={() => this.loginUser()}>

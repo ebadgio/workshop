@@ -8,7 +8,7 @@ const ModalBackground = styled('div')`
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 60px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -24,10 +24,11 @@ const ModalContent = styled('div')`
     padding: 20px;
     border-radius: 6px;
     max-width: 90%;
-    min-height; 200px;
-    box-sizing: border-box;
     position: relative;
-    font-family: sans-serif
+    font-family: sans-serif;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: calc(100% - 60px);
 `;
 
 
@@ -48,20 +49,26 @@ export default class Modal extends React.Component {
         // Get the button that closes the modal
         const close = document.getElementById(this.props.modalCloseId);
 
+        // Body
+        const body = document.getElementById('body');
+
         // When the user clicks the trigger, open the modal
         trigger.onpointerdown = () => {
             modal.style.display = 'block';
+            body.style.overflow = 'hidden';
         };
 
         // When the user clicks on <span> (x), close the modal
         close.onpointerdown = () => {
             modal.style.display = 'none';
+            body.style.overflow = 'initial';
         };
 
         // When the user clicks anywhere outside of the modal, close it
         window.onpointerdown = () => {
             if (event.target === modal) {
                 modal.style.display = 'none';
+                body.style.overflow = 'initial';
             }
         }
     }
