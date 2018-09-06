@@ -82,7 +82,11 @@ This will be a site for editing and sharing creative writing works such as short
 * Select type
     * ~Select element ui~
     * Populate with types from db
-* Select topics
+* ~Select topics~
+* ~Add description~
+* ~Create work api route~
+* Work reducer config
+
 
 
 
