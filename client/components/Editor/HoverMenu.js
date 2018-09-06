@@ -8,13 +8,6 @@ import Icon from '../modules/Icon';
 
 class HoverMenu extends React.Component {
 
-    // this.renderMarkButton = this.renderMarkButton.bind(this);
-    // this.onClickMark = this.onClickMark.bind(this);
-    componentDidMount() {
-        // Convert feather icons to svg
-        window.feather.replace();
-    }
-
     render() {
         const { className, innerRef } = this.props
         const root = window.document.getElementById('root')

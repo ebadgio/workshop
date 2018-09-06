@@ -11,6 +11,7 @@ export const TextArea = styled('textarea')`
     -webkit-appearance: none;
     border: none;
     font-size: 16px;
+    line-height: 20px;
 `;
 
 export const FlatTextArea = styled(TextArea)`

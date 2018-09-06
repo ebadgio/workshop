@@ -59,6 +59,12 @@ export const ButtonIcon = styled(Button)`
     }  
 `;
 
+export const ButtonDisabled = styled(Button)`
+    background: #e9e9e9;
+    color: #bdbdbd;
+    cursor: default;
+`;
+
 // const Button = ({type, style, contents, action, active}) => {
 //
 // 	switch (type) {

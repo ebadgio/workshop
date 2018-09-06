@@ -48,5 +48,10 @@ export const Frame = styled('div')`
 export const Text = styled('p')`
     font-size: 16px;
     color: #424242;
-`
+`;
+
+export const Note = styled('span')`
+    font-size: 12px;
+    color: #bdbdbd;
+`;
 

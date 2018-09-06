@@ -28,7 +28,7 @@ const ModalContent = styled('div')`
     font-family: sans-serif;
     box-sizing: border-box;
     overflow-y: auto;
-    max-height: calc(100% - 60px);
+    max-height: calc(100% - 70px);
 `;
 
 
@@ -78,7 +78,7 @@ export default class Modal extends React.Component {
         const sizes = {'small': '400px', 'medium': '600px', 'large': '800px'};
 
         return (<ModalBackground id={this.props.modalId}>
-            <ModalContent style={{width: sizes[this.props.size]}}>
+            <ModalContent style={{...this.props.style, width: sizes[this.props.size]}}>
                 <ButtonIcon id={this.props.modalCloseId}
                             style={{position: 'absolute', top: '0', right: '10px', height: '40x', width:'40px'}}>
                     <Icon name={'x'}/>

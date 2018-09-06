@@ -70,7 +70,6 @@ export class Menu extends React.Component {
         event.preventDefault();
         // console.log('clicked');
         this.setState({ showMenu: true }, () => {
-            window.feather.replace();
             document.addEventListener('click', this.closeMenu)
         });
     }

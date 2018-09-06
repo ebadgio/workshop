@@ -178,5 +178,34 @@ router.get('/fetch/types', (req, res) => {
         })
 });
 
+router.post('/create/work', (req, res) => {
+
+    // User must be in an active session to save a work
+    if (!req.user) return res.redirect('/');
+
+    // Request sender must be same user as user in session
+    if (req.user._id !== req.body.author) return res.redirect('/');
+
+    const newWork = new Work({
+        author: req.body.author,
+        title: req.body.title,
+        content: req.body.content,
+        type: req.body.type,
+        topics: req.body.topics,
+        description: req.body.description
+    });
+
+    newWork.save()
+
+        .then((savedWork) => {
+            return res.json({success: true, work: savedWork});
+        })
+
+        .catch((err) => {
+            console.log('error in work create', err);
+            return res.json({success: false, error: err});
+        })
+
+});
 
 module.exports = router;

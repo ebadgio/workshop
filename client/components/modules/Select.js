@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 
 import {MenuWrapper} from "./Menu";
 import {Dropdown, Option} from "./Dropdown";
-import {Frame, RowWrap} from "../elements";
+import {Frame, RowWrap, Note} from "../elements";
 import {Input} from "./TextInput";
 import Icon from './Icon';
 
@@ -87,7 +87,7 @@ export class Select extends React.Component{
         span.style.color = '#424242';
         this.close();
 
-        //this.props.onSelect(option);
+        this.props.onSelect(option);
     }
 
     render() {
@@ -144,16 +144,22 @@ export class MultiSelect extends React.Component {
     }
 
     componentDidMount() {
-        const elem = document.getElementById(this.props.iId);
 
         const interval = setInterval(() => {
-            const rect = elem.getBoundingClientRect();
-            this.setState({top: rect.top + 40, left:rect.left});
+            const elem = document.getElementById(this.props.iId);
+
+            if (elem) {
+                const rect = elem.getBoundingClientRect();
+                this.setState({top: rect.top + 40, left:rect.left});
+            }
+
         }, 100);
 
         this.setState({interval: interval});
 
         window.onclick = (event) => {
+            const elem = document.getElementById(this.props.iId);
+
             if (event.target !== elem) {
                 const d = document.getElementById(this.props.dId);
                 if (d) d.style.display = 'none';
@@ -177,20 +183,20 @@ export class MultiSelect extends React.Component {
 
         if (!this.state.selectedNames.includes(option.text)) {
             this.setState({selected: this.state.selected.concat([option]),
-                selectedNames: this.state.selectedNames.concat([option.text])})
+                selectedNames: this.state.selectedNames.concat([option.text])});
+            this.props.onSelect(option);
+            document.getElementById(this.props.iId).value = '';
         }
-
-        // this.props.onSelect(option);
     }
 
     remove(option) {
-        console.log('remove', option);
+        //console.log('remove', option);
         this.setState({selected: this.state.selected.filter((s) => s.text !== option.text),
-            selectedNames: this.state.selectedNames.filter((s) => s !== option.text)})
+            selectedNames: this.state.selectedNames.filter((s) => s !== option.text)});
+        this.props.onRemove(option);
     }
 
     render() {
-        window.feather.replace();
         return (
             <RowWrap>
                 {this.state.selected.map((s) => (<Selected key={s.value}>
@@ -200,11 +206,11 @@ export class MultiSelect extends React.Component {
                            className="selected-icon color-hover"/>
                     </div>
                 </Selected>))}
-                <SelectInput placeholder="Add a topic..."
+                {this.state.selected.length < this.props.limit ? <SelectInput placeholder="Add a topic..."
                              onChange={(e) => this.onChange(e)}
                              id={this.props.iId}
                              onFocus={() => this.open()}
-                             type="text" />
+                             type="text" /> : <Note>Topic limit reached.</Note>}
                 <Dropdown style={{top: this.state.top, left:this.state.left }}
                           id={this.props.dId}>
                     {this.state.options.map((option) => <Option className="background-hover"
