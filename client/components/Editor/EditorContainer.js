@@ -9,6 +9,7 @@ import TextEditor from '../Editor/TextEditor';
 
 // Thunks
 import saveDraftThunk from '../../thunks/saveDraftThunk';
+import createNewWorkThunk from '../../thunks/createNewWorkThunk';
 
 
 class EditorContainer extends React.Component {
@@ -24,6 +25,7 @@ class EditorContainer extends React.Component {
             title: props.title
 		};
 		this.saveDraft = this.saveDraft.bind(this);
+		this.publish = this.publish.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -37,6 +39,10 @@ class EditorContainer extends React.Component {
 	saveDraft(author, title, content, draftId) {
 		this.props.saveDraft(author, title, content, draftId);
 	}
+
+    publish(title, content, type, topics) {
+        this.props.createWork(this.props.user._id, title, content, type, topics);
+    }
 
 	render() {
 
@@ -53,6 +59,7 @@ class EditorContainer extends React.Component {
                             fromDraft={this.state.fromDraft}
 							value={this.state.value}
 							title={this.state.title}
+                            publish={this.publish}
 							saveDraft={this.saveDraft}/>
 			</div>
 		);
@@ -68,7 +75,8 @@ EditorContainer.propTypes = {
 	draftId: PropTypes.string,
     fromDraft: PropTypes.bool,
     title: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    createWork: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -85,7 +93,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	saveDraft: (author, title, content, draftId) =>
 							dispatch(saveDraftThunk(author, title, content, draftId)),
-	closeEdit: () => dispatch({type: 'CLOSE_EDIT'})
+	closeEdit: () => dispatch({type: 'CLOSE_EDIT'}),
+    createWork: (author, title, content, type, topics) => dispatch(createNewWorkThunk(author, title, content, type, topics))
 });
 
 

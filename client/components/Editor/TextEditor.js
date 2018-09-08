@@ -48,6 +48,7 @@ class TextEditor extends React.Component {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.renderMark = this.renderMark.bind(this);
         this.updateMenu = this.updateMenu.bind(this);
+        this.publish = this.publish.bind(this);
 
     // setTimeout(() => this.setState({waiting: false}), 300)
     }
@@ -218,6 +219,10 @@ class TextEditor extends React.Component {
         }
     }
 
+    publish(type, topics) {
+        this.props.publish(this.state.titleVal, JSON.stringify(value.toJSON()), type, topics)
+    }
+
   // Render the editor.
     render() {
         if (this.state.loading) {
@@ -255,7 +260,7 @@ class TextEditor extends React.Component {
                            onChange={(e) => this.changeTitle(e)} />
                 </div>
 
-                <PublishContainer />
+                <PublishContainer publish={this.publish}/>
 
                 <Editor value={this.state.value}
                         onChange={this.onChange}
@@ -274,7 +279,8 @@ TextEditor.propTypes = {
     draftId: PropTypes.string,
     value: PropTypes.string,
     fromDraft: PropTypes.bool,
-    title: PropTypes.string
+    title: PropTypes.string,
+    publish: PropTypes.func
 };
 
 export default TextEditor

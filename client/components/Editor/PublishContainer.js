@@ -11,6 +11,7 @@ import {ButtonPrimary, ButtonDisabled} from "../modules/Button";
 
 // Thunks
 import fetchTypesThunk from '../../thunks/fetchTypesThunk';
+import fetchTopicsThunk from '../../thunks/fetchTopicsThunk';
 
 class PublishContainer extends React.Component {
     constructor(props) {
@@ -20,17 +21,26 @@ class PublishContainer extends React.Component {
             numCharacters: 0,
             hasType: false,
             type: '',
-            topics: [],
+            topics: props.topics,
             hasDescription: false
         }
     }
 
     componentDidMount() {
         this.props.fetchTypes();
+        this.props.fetchTopics();
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({types: nextProps.types.map((type) => ({value: type._id, text: type.name}))})
+
+        if (this.state.types.length === 0) {
+            this.setState({types: nextProps.types.map((type) => ({value: type._id, text: type.name}))})
+        }
+
+        if (this.state.topics.length === 0) {
+            this.setState({topics: nextProps.topics.map((topic) => ({value: topic._id, text: topic.name}))})
+        }
+
     }
 
     onSelectBasic(option) {
@@ -51,6 +61,10 @@ class PublishContainer extends React.Component {
     onChangeText(e) {
         const length = e.target.value.length;
         this.setState({numCharacters: length, hasDescription: length > 0 });
+    }
+
+    publish() {
+        this.props.publish(this.state.type, this.state.topics);
     }
 
     render() {
@@ -77,7 +91,7 @@ class PublishContainer extends React.Component {
                              limit={3}
                              onSelect={(option) => this.onSelectMulti(option)}
                              onRemove={(option) => this.onRemove(option)}
-                             options={[{text: 'abc', value:'abc'}, {text: 'bcd', value:'bcd'}, {text: 'cef', value:'cef'}]}/>
+                             options={this.state.topics}/>
                 <Text>
                     *Tell readers what this work is about with a brief description (140 character max):
                 </Text>
@@ -87,7 +101,8 @@ class PublishContainer extends React.Component {
                 <FlatTextArea rows={2}
                               onChange={(e) => this.onChangeText(e)}/>
                 {this.state.hasType && this.state.hasDescription ?
-                    <ButtonPrimary style={{marginLeft: 'auto'}}>
+                    <ButtonPrimary style={{marginLeft: 'auto'}}
+                                   onClick={() => this.publish()}>
                         Publish
                     </ButtonPrimary> :
                     <ButtonDisabled style={{marginLeft: 'auto'}}>
@@ -101,15 +116,20 @@ class PublishContainer extends React.Component {
 
 PublishContainer.propTypes = {
     fetchTypes: PropTypes.func,
-    types: PropTypes.array
+    fetchTopics: PropTypes.func,
+    types: PropTypes.array,
+    topics: PropTypes.array,
+    publish: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
-    types: state.editReducer.types
+    types: state.editReducer.types,
+    topics: state.editReducer.topics,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchTypes: () => dispatch(fetchTypesThunk())
+    fetchTypes: () => dispatch(fetchTypesThunk()),
+    fetchTopics: () => dispatch(fetchTopicsThunk())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublishContainer)

@@ -178,6 +178,17 @@ router.get('/fetch/types', (req, res) => {
         })
 });
 
+router.get('/fetch/topics/all', (req, res) => {
+    Topic.find()
+        .then((topics) => {
+            return res.json({success: true, topics: topics})
+        })
+
+        .catch((err) => {
+            return res.json({success: false, err: err})
+        })
+});
+
 router.post('/create/work', (req, res) => {
 
     // User must be in an active session to save a work
@@ -185,6 +196,8 @@ router.post('/create/work', (req, res) => {
 
     // Request sender must be same user as user in session
     if (req.user._id !== req.body.author) return res.redirect('/');
+
+    let workSend;
 
     const newWork = new Work({
         author: req.body.author,
@@ -197,8 +210,38 @@ router.post('/create/work', (req, res) => {
 
     newWork.save()
 
+        // Create the new work
         .then((savedWork) => {
-            return res.json({success: true, work: savedWork});
+            workSend = savedWork;
+            return Type.findById(req.body.type)
+        })
+
+        // Update this number of uses for this work's selected type
+        .then((type) => {
+            type.uses += 1;
+            return type.save();
+        })
+
+        // Find all the topics
+        .then((saved) => {
+            return Promise.all(
+                req.body.topics.map((topic) => Topic.findById(topic))
+            )
+        })
+
+        // For each topic, increment its number of uses
+        .then((topics) => {
+            return Promise.all(
+                topics.map((topic) => {
+                    topic.uses += 1;
+                    return topic.save();
+                })
+            )
+        })
+
+        // Send created work back to client
+        .then((savedTopics) => {
+            return res.json({success: true, work: workSend});
         })
 
         .catch((err) => {

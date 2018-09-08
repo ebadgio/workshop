@@ -69,15 +69,21 @@ export class Select extends React.Component{
 
         this.setState({interval: interval});
 
-        window.onclick = (event) => {
-            if (event.target !== elem) {
-                this.close()
-            }
+        window.addEventListener('click', this.windowClose.bind(this));
+    }
+
+    windowClose(event) {
+
+        const elem = document.getElementById(this.props.sId);
+
+        if (event.target !== elem) {
+            this.close()
         }
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval);
+        window.removeEventListener('click', this.windowClose);
     }
 
     select(option) {
@@ -157,18 +163,21 @@ export class MultiSelect extends React.Component {
 
         this.setState({interval: interval});
 
-        window.onclick = (event) => {
-            const elem = document.getElementById(this.props.iId);
-
-            if (event.target !== elem) {
-                const d = document.getElementById(this.props.dId);
-                if (d) d.style.display = 'none';
-            }
-        }
+        window.addEventListener('click', this.windowClose.bind(this));
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval);
+        window.removeEventListener('click', this.windowClose.bind(this));
+    }
+
+    windowClose(event) {
+        const elem = document.getElementById(this.props.iId);
+
+        if (event.target !== elem) {
+            const d = document.getElementById(this.props.dId);
+            if (d) d.style.display = 'none';
+        }
     }
 
     onChange(e) {
