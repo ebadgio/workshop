@@ -53,8 +53,7 @@ class MyWorksContainer extends React.Component {
         return arr[1] + ' ' + arr[2] + ', ' + arr[3];
     }
 
-    loadDraft(draftId, draftValue, draftTitle) {
-        this.props.loadDraft(draftId, draftValue, draftTitle);
+    loadDraft(draftId) {
         this.props.navigate('/edit/draft/' + draftId);
     }
 
@@ -74,7 +73,7 @@ class MyWorksContainer extends React.Component {
                     <Column>
                         {this.state.drafts.map((draft) =>
                             <DraftCard title={draft.title}
-                                       onClick={() => this.loadDraft(draft._id, draft.content, draft.title)}
+                                       onClick={() => this.loadDraft(draft._id)}
                                        createdAt={this.formatCreatedAt(draft.createdAt)}
                                        updatedAt={this.daysSinceNow(draft.updatedAt)}
                                        key={draft._id}/>
@@ -99,8 +98,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchWorks: (id) => dispatch(fetchWorksThunk(id)),
-    loadDraft: (id, val, title) => dispatch({type: 'OPEN_EDIT',
-        draftId: id, value: val, fromDraft: true, title: title}),
+    loadDraft: () => dispatch({type: 'OPEN_EDIT'}),
     navigate: (route) => dispatch(push(route))
 });
 

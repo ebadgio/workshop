@@ -10,6 +10,7 @@ export const Input = styled('input')`
     background: none;
     margin: 15px 0;
     box-sizing: border-box;
+    border-radius: 4px;
 `;
 
 export const FlatInput = styled(Input)`

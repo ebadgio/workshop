@@ -90,6 +90,21 @@ router.post('/save/draft', (req, res) => {
     }
 });
 
+router.get('/fetch/draft/:draftId', (req, res) => {
+    Draft.findById(req.params.draftId)
+        .populate('author')
+        .then((draft) => {
+            if (draft) {
+                return res.json({success: true, draft: draft});
+            } else {
+                return res.json({success: false});
+            }
+        })
+        .catch((err) => {
+           return res.json({success: false, error: err});
+        });
+});
+
 router.get('/fetch/works/:userId', (req,res) => {
 
     // TODO: paginate drafts and works with query parameters
