@@ -1,6 +1,6 @@
-
-const editReducer = (state = {isEditing: false,
-	isSaving: false,
+const defaultState = {
+    isEditing: false,
+    isSaving: false,
     saveSuccess: true,
     fromDraft: false,
     draftId: '',
@@ -8,7 +8,8 @@ const editReducer = (state = {isEditing: false,
     value: '',
     types: [],
     topics: []
-}, action) => {
+};
+const editReducer = (state = defaultState, action) => {
 
 	switch (action.type) {
         case 'LOAD_DRAFT_FAILURE':
@@ -18,6 +19,13 @@ const editReducer = (state = {isEditing: false,
 				isSaving: false,
 				isEditing: true,
 			};
+        case 'NEW_DRAFT': {
+            console.log('new draft');
+            return {
+                ...defaultState,
+                isEditing: true
+            };
+        }
 		case 'LOAD_DRAFT': {
 			return {
                 ...state,

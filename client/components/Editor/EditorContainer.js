@@ -35,13 +35,19 @@ class EditorContainer extends React.Component {
 	    if (this.props.match.params.id) {
             this.props.fetchDraft(id);
 		} else {
-	        this.setState({loading: false});
+	        this.props.newDraft();
         }
     }
 
 	componentWillReceiveProps(nextProps) {
 	    console.log('edit container', nextProps);
-		this.setState(nextProps);
+		this.setState({isSaving: nextProps.isSaving,
+            saveSuccess: nextProps.saveSuccess,
+            fromDraft: nextProps.fromDraft,
+            draftId: nextProps.draftId,
+            value: nextProps.value,
+            title: nextProps.title,
+            loading: false});
 	}
 
 	componentWillUnmount() {
@@ -96,7 +102,8 @@ EditorContainer.propTypes = {
     value: PropTypes.string,
     match: PropTypes.object,
     createWork: PropTypes.func,
-    fetchDraft: PropTypes.func
+    fetchDraft: PropTypes.func,
+    newDraft: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -115,6 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
 							dispatch(saveDraftThunk(author, title, content, draftId)),
 	closeEdit: () => dispatch({type: 'CLOSE_EDIT'}),
     fetchDraft: (id) => dispatch(fetchDraftThunk(id)),
+    newDraft: () => dispatch({type: 'NEW_DRAFT'}),
     createWork: (author, title, content, type, topics) => dispatch(createNewWorkThunk(author, title, content, type, topics))
 });
 

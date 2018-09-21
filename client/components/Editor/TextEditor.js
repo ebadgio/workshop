@@ -73,17 +73,6 @@ class TextEditor extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('text editor', nextProps);
-        // let value = initialValue;
-        // let titleVal= '';
-        //
-        // if (this.props.fromDraft && !this.state.loadedDraft) {
-        //     value = Value.fromJSON(JSON.parse(this.props.value));
-        //     titleVal= this.props.title;
-        // }
-        //
-        // this.setState({value: value, loading: false, titleVal: titleVal, loadedDraft: true});
-
         if (!nextProps.isSaving && nextProps.saveSuccess) {
             this.setState({saveState: 'Saved'});
         }

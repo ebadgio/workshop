@@ -75,8 +75,12 @@ class NavbarContainer extends React.Component {
 								<MenuItem to={'/u/' + this.state.user.username}>
                                     Profile
 								</MenuItem>
-								<MenuItem to={'/my/works'}>Your Works</MenuItem>
-                                <MenuItem to={'/new/draft'}>New Work</MenuItem>
+								<MenuItem to={'/my/works'}>
+                                    Your Works
+                                </MenuItem>
+                                <MenuItem to={'/new/draft'}>
+                                    New Work
+                                </MenuItem>
 								<Divider />
                                 <MenuItem action={() => this.props.logout()}>
 									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
@@ -119,7 +123,7 @@ class NavbarContainer extends React.Component {
 NavbarContainer.propTypes = {
 	user: PropTypes.object,
 	openEdit: PropTypes.func,
-    logout: PropTypes.func
+    logout: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -128,8 +132,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	  logout: () => dispatch(logoutUserThunk()),
-	  openEdit: () => dispatch({type: 'OPEN_EDIT'}),
+    logout: () => dispatch(logoutUserThunk()),
+    openEdit: () => dispatch({type: 'OPEN_EDIT'})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
