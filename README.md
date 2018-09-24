@@ -8,6 +8,9 @@ This will be a site for editing and sharing creative writing works such as short
  * React.js; Redux; React-Router; Redux-Thunk
  * Webpack
  * Slate.js (an opensource react framework for building rich text editors)
+ 
+## Current State
+![](/build/demo.mov)
 
 ## Usage
 
