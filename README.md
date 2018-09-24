@@ -10,7 +10,7 @@ This will be a site for editing and sharing creative writing works such as short
  * Slate.js (an opensource react framework for building rich text editors)
  
 ## Current State
-![](https://github.com/ebadgio/workshop/blob/master/build/demo.mov)
+![](https://github.com/ebadgio/workshop/blob/master/assets/demo.gif)
 
 ## Usage
 
