@@ -11,7 +11,7 @@ import {RowApart, Column, RowWrap} from "../elements";
 import {DraftCard} from "./components";
 
 // Thunks
-import fetchWorksThunk from "../../thunks/fetchWorksThunk";
+import fetchDraftsThunk from "../../thunks/fetchDraftsThunk";
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -26,7 +26,7 @@ class MyWorksContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.user._id) {
-            this.props.fetchWorks(this.props.user._id)
+            this.props.fetchDrafts(this.props.user._id, 0)
         }
     }
 
@@ -87,7 +87,7 @@ class MyWorksContainer extends React.Component {
 
 MyWorksContainer.propTypes = {
     user: PropTypes.object,
-    fetchWorks: PropTypes.func,
+    fetchDrafts: PropTypes.func,
     loadDraft: PropTypes.func,
     navigate: PropTypes.func
 };
@@ -97,7 +97,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchWorks: (id) => dispatch(fetchWorksThunk(id)),
+    fetchDrafts: (id, pageNum) => dispatch(fetchDraftsThunk(id, pageNum)),
     loadDraft: () => dispatch({type: 'OPEN_EDIT'}),
     navigate: (route) => dispatch(push(route))
 });

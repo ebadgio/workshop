@@ -82,7 +82,7 @@ class NavbarContainer extends React.Component {
                                     New Work
                                 </MenuItem>
 								<Divider />
-                                <MenuItem action={() => this.props.logout()}>
+                                <MenuItem onClick={() => this.props.logout()} to={'#'}>
 									<Icon name={'log-out'} style={{marginRight: '10px', height: '20px', width: '20px'}}/>
 									Logout
 								</MenuItem>
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(logoutUserThunk()),
-    openEdit: () => dispatch({type: 'OPEN_EDIT'})
+    openEdit: () => dispatch({type: 'NEW_DRAFT'})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);

@@ -11,10 +11,9 @@ const userReducer = (state = {
 			return action.user;
         case 'USER_LOGOUT':
             return {};
-		case 'USER_WORKS_FETCH':
+		case 'USER_DRAFTS_FETCH':
 			return {
 				...state,
-				works: action.works,
 				drafts: action.drafts
 			};
 		default:

@@ -20,10 +20,17 @@ const editReducer = (state = defaultState, action) => {
 				isEditing: true,
 			};
         case 'NEW_DRAFT': {
-            console.log('new draft');
+            // console.log('new draft');
             return {
-                ...defaultState,
-                isEditing: true
+                isEditing: true,
+                isSaving: false,
+                saveSuccess: true,
+                fromDraft: false,
+                draftId: '',
+                title: '',
+                value: '',
+                types: [],
+                topics: []
             };
         }
 		case 'LOAD_DRAFT': {

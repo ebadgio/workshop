@@ -25,7 +25,7 @@ const MenuWrapperNav = styled(MenuWrapper)`
 `;
 
 
-const MenuItemStyle = styled(Link)`
+export const MenuItem = styled(Link)`
     width: 100%;
     padding: 10px 30px;
     height: 40px;
@@ -40,11 +40,11 @@ const MenuItemStyle = styled(Link)`
 
 `;
 
-export const MenuItem = (props) => <MenuItemStyle className="color-hover"
-                                                  onClick={props.action}
-                                                  to={props.to ? props.to : '/#'}>
-    {props.children}
-</MenuItemStyle>;
+// export const MenuItem = (props) => <MenuItemStyle className="color-hover"
+//                                                   onClick={props.action}
+//                                                   to={props.to ? props.to : '/#'}>
+//     {props.children}
+// </MenuItemStyle>;
 
 export class Menu extends React.Component {
     constructor(props) {

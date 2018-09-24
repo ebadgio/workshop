@@ -105,6 +105,33 @@ router.get('/fetch/draft/:draftId', (req, res) => {
         });
 });
 
+router.get('/fetch/drafts/:userId', (req,res) => {
+
+    // console.log('hit fetch user drafts');
+
+    if (req.params.userId !== req.user._id.toString()) {
+        return res.redirect('/');
+    }
+
+    // Find 10 most recently updated drafts
+    Draft.find({"author": req.params.userId})
+        .limit(10)
+        .skip(req.query.pageNum * 10)
+        .sort({"updatedAt": -1})
+        .populate('author')
+
+        .then((drafts) => {
+            return res.json({success: true, drafts: drafts});
+        })
+
+        .catch((err) => {
+            console.log('fetch user drafts error', err);
+            return res.json({success: false, error: err});
+        });
+
+
+});
+
 router.get('/fetch/works/:userId', (req,res) => {
 
     // TODO: paginate drafts and works with query parameters
@@ -115,28 +142,19 @@ router.get('/fetch/works/:userId', (req,res) => {
         return res.redirect('/');
     }
 
-    let sendDrafts;
-
     // Find 10 most recently updated drafts
-    Draft.find({"author": req.params.userId})
+    Work.find({"author": req.params.userId})
         .limit(10)
+        .skip(req.query.pageNum * 10)
         .sort({"updatedAt": -1})
         .populate('author')
 
-        .then((drafts) => {
-            sendDrafts = drafts;
-            return Work.find({"author": req.params._id})
-                .limit(10)
-                .sort({"createdAt": -1})
-                .populate('author')
-        })
-
         .then((works) => {
-            return res.json({success: true, drafts: sendDrafts, works: works});
+            return res.json({success: true, works: works});
         })
 
         .catch((err) => {
-            console.log('fetch user drafts error', err);
+            console.log('fetch user works error', err);
             return res.json({success: false, error: err});
         });
 

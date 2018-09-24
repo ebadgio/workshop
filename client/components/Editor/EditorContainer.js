@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom';
 
 // Components
 import TextEditor from '../Editor/TextEditor';
+import {Loader} from '../modules/Loader';
 
 // Thunks
 import saveDraftThunk from '../../thunks/saveDraftThunk';
@@ -69,9 +70,11 @@ class EditorContainer extends React.Component {
         }
 
         if (this.state.loading) {
-	        return (<div className="page-wrapper frame">
-                Loading...
-            </div>)
+	        return (
+                <div className="page-wrapper frame">
+	                <Loader />
+                </div>
+            )
         }
 
 		return(
@@ -103,7 +106,8 @@ EditorContainer.propTypes = {
     match: PropTypes.object,
     createWork: PropTypes.func,
     fetchDraft: PropTypes.func,
-    newDraft: PropTypes.func
+    newDraft: PropTypes.func,
+    isEditing: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
@@ -113,7 +117,8 @@ const mapStateToProps = (state) => ({
 	draftId: state.editReducer.draftId,
     fromDraft: state.editReducer.fromDraft,
     title: state.editReducer.title,
-    value: state.editReducer.value
+    value: state.editReducer.value,
+	isEditing: state.editReducer.isEditing
 });
 
 
