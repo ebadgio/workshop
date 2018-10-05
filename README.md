@@ -22,7 +22,8 @@ This will be a site for editing and sharing creative writing works such as short
       * Command: ```npm run build```
   3. **Start the server**
       * Command: ```npm run server```
-      * Navigate to http://localhost:3000 and you should see **We're up and running!**
+      * Navigate to http://localhost:3000 and you should see a page saying "Home Page"
+      * You must register/login in order to see the editor.
   4. **After making changes always  run webpack**
       * During development: ```npm run build```
       * For production: ```npm run prod```
