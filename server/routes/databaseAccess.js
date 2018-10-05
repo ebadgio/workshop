@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
@@ -225,11 +226,18 @@ router.get('/fetch/topics/all', (req, res) => {
 router.post('/create/work', (req, res) => {
 
     // User must be in an active session to save a work
-    if (!req.user) return res.redirect('/');
+    if (!req.user) {
+        res.redirect('/');
+        return;
+    }
 
     // Request sender must be same user as user in session
-    if (req.user._id !== req.body.author) return res.redirect('/');
+    if (!req.user._id.equals(mongoose.Types.ObjectId(req.body.author))) {
+        res.redirect('/');
+        return;
+    }
 
+    // Need to store the work after it's saved in order to send back to client
     let workSend;
 
     const newWork = new Work({
@@ -241,9 +249,9 @@ router.post('/create/work', (req, res) => {
         description: req.body.description
     });
 
+    // Create the new work
     newWork.save()
 
-        // Create the new work
         .then((savedWork) => {
             workSend = savedWork;
             return Type.findById(req.body.type)
@@ -262,7 +270,7 @@ router.post('/create/work', (req, res) => {
             )
         })
 
-        // For each topic, increment its number of uses
+        // For each topic, increment its number of uses and save
         .then((topics) => {
             return Promise.all(
                 topics.map((topic) => {

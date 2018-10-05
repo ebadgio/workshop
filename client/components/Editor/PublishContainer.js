@@ -21,7 +21,8 @@ class PublishContainer extends React.Component {
             numCharacters: 0,
             hasType: false,
             type: '',
-            topics: props.topics,
+            options: props.topics,
+            topics: [],
             hasDescription: false
         }
     }
@@ -37,25 +38,25 @@ class PublishContainer extends React.Component {
             this.setState({types: nextProps.types.map((type) => ({value: type._id, text: type.name}))})
         }
 
-        if (this.state.topics.length === 0) {
-            this.setState({topics: nextProps.topics.map((topic) => ({value: topic._id, text: topic.name}))})
+        if (this.state.options.length === 0) {
+            this.setState({options: nextProps.topics.map((topic) => ({value: topic._id, text: topic.name}))})
         }
 
     }
 
     onSelectBasic(option) {
         console.log('selected', option);
-        this.setState({hasType: true, type: option._id})
+        this.setState({hasType: true, type: option.value})
     }
 
     onSelectMulti(option) {
         console.log('selected multi', option);
-        this.setState({topics: this.state.topics.concat([option._id])});
+        this.setState({topics: this.state.topics.concat([option.value])});
     }
 
     onRemove(option) {
         console.log('removed', option);
-        this.setState({topics: this.state.topics.filter((topic) => topic !== option._id)});
+        this.setState({topics: this.state.topics.filter((topic) => topic !== option.value)});
     }
 
     onChangeText(e) {
@@ -64,7 +65,9 @@ class PublishContainer extends React.Component {
     }
 
     publish() {
-        this.props.publish(this.state.type, this.state.topics);
+        console.log(this.state.type, this.state.topics);
+        const desc = document.getElementById('publish-description').value;
+        this.props.publish(this.state.type, this.state.topics, desc);
     }
 
     render() {
@@ -91,7 +94,7 @@ class PublishContainer extends React.Component {
                              limit={3}
                              onSelect={(option) => this.onSelectMulti(option)}
                              onRemove={(option) => this.onRemove(option)}
-                             options={this.state.topics}/>
+                             options={this.state.options}/>
                 <Text>
                     *Tell readers what this work is about with a brief description (140 character max):
                 </Text>
@@ -99,6 +102,7 @@ class PublishContainer extends React.Component {
                     {this.state.numCharacters} characters
                 </Note>
                 <FlatTextArea rows={2}
+                              id={'publish-description'}
                               onChange={(e) => this.onChangeText(e)}/>
                 {this.state.hasType && this.state.hasDescription ?
                     <ButtonPrimary style={{marginLeft: 'auto'}}

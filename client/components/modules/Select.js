@@ -137,6 +137,7 @@ const SelectInput = styled(Input)`
 export class MultiSelect extends React.Component {
     constructor(props) {
         super(props);
+        console.log('multi select', props.options);
         this.state = {
             options: props.options.slice(0, 5),
             selectedNames: [],

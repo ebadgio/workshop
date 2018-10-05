@@ -1,13 +1,14 @@
 import axios from 'axios';
 import URL from '../../info';
 
-const createNewWorkThunk = (author, title, content, type, topics) => (dispatch) => {
+const createNewWorkThunk = (author, title, content, type, topics, description,) => (dispatch) => {
 
     const headers = {
         author: author,
         title: title,
         content: content,
         type: type,
+        description: description,
         topics: topics
     };
 

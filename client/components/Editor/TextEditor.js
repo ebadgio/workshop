@@ -219,8 +219,8 @@ class TextEditor extends React.Component {
         }
     }
 
-    publish(type, topics) {
-        this.props.publish(this.state.titleVal, JSON.stringify(value.toJSON()), type, topics)
+    publish(type, topics, desc) {
+        this.props.publish(this.state.titleVal, JSON.stringify(this.state.value.toJSON()), type, topics, desc)
     }
 
   // Render the editor.

@@ -59,8 +59,8 @@ class EditorContainer extends React.Component {
 		this.props.saveDraft(author, title, content, draftId);
 	}
 
-    publish(title, content, type, topics) {
-        this.props.createWork(this.props.user._id, title, content, type, topics);
+    publish(title, content, type, topics, desc) {
+        this.props.createWork(this.props.user._id, title, content, type, topics, desc);
     }
 
 	render() {
@@ -128,7 +128,7 @@ const mapDispatchToProps = (dispatch) => ({
 	closeEdit: () => dispatch({type: 'CLOSE_EDIT'}),
     fetchDraft: (id) => dispatch(fetchDraftThunk(id)),
     newDraft: () => dispatch({type: 'NEW_DRAFT'}),
-    createWork: (author, title, content, type, topics) => dispatch(createNewWorkThunk(author, title, content, type, topics))
+    createWork: (author, title, content, type, topics, desc) => dispatch(createNewWorkThunk(author, title, content, type, topics, desc))
 });
 
 
