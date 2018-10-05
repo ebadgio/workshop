@@ -29,10 +29,11 @@ export const ButtonOutlinePrimary = styled(ButtonOutline)`
 `;
 
 export const ButtonPrimary = styled(Button)`
-    background: #8c9eff;
-    color: #fff;
+    background: ${props => props.disabled ? '#e9e9e9': '#8c9eff'};
+    color:${props => props.disabled ?  '#bdbdbd': '#fff'};
+    cursor: ${props => props.disabled ? 'default' : 'pointer'};
     &:hover {
-        background: #5870cb
+        background: ${props => props.disbaled ? '#8c9eff' : '#5870cb'}
     }
 `;
 

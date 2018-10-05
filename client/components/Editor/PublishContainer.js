@@ -8,6 +8,7 @@ import {Divider, Text, Note} from "../elements";
 import {MultiSelect, Select} from "../modules/Select";
 import {FlatTextArea} from "../modules/TextArea";
 import {ButtonPrimary, ButtonDisabled} from "../modules/Button";
+import {Loader} from "../modules/Loader";
 
 // Thunks
 import fetchTypesThunk from '../../thunks/fetchTypesThunk';
@@ -35,27 +36,29 @@ class PublishContainer extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         if (this.state.types.length === 0) {
-            this.setState({types: nextProps.types.map((type) => ({value: type._id, text: type.name}))})
+            this.setState({types: nextProps.types.map((type) => ({value: type._id, text: type.name}))});
         }
 
         if (this.state.options.length === 0) {
-            this.setState({options: nextProps.topics.map((topic) => ({value: topic._id, text: topic.name}))})
+            this.setState({options: nextProps.topics.map((topic) => ({value: topic._id, text: topic.name}))});
+        }
+
+        if (this.state.waiting) {
+            this.setState({saveSuccess: nextProps.saveSuccess, waiting: false});
+            console.log('done waiting, status: ', nextProps.saveSuccess);
         }
 
     }
 
     onSelectBasic(option) {
-        console.log('selected', option);
-        this.setState({hasType: true, type: option.value})
+        this.setState({hasType: true, type: option.value});
     }
 
     onSelectMulti(option) {
-        console.log('selected multi', option);
         this.setState({topics: this.state.topics.concat([option.value])});
     }
 
     onRemove(option) {
-        console.log('removed', option);
         this.setState({topics: this.state.topics.filter((topic) => topic !== option.value)});
     }
 
@@ -65,12 +68,13 @@ class PublishContainer extends React.Component {
     }
 
     publish() {
-        console.log(this.state.type, this.state.topics);
         const desc = document.getElementById('publish-description').value;
         this.props.publish(this.state.type, this.state.topics, desc);
+        this.setState({waiting: true});
     }
 
     render() {
+
         return (
             <Modal size={'medium'}
                    triggerId={'open-modal-publish'}
@@ -104,15 +108,11 @@ class PublishContainer extends React.Component {
                 <FlatTextArea rows={2}
                               id={'publish-description'}
                               onChange={(e) => this.onChangeText(e)}/>
-                {this.state.hasType && this.state.hasDescription ?
-                    <ButtonPrimary style={{marginLeft: 'auto'}}
-                                   onClick={() => this.publish()}>
-                        Publish
-                    </ButtonPrimary> :
-                    <ButtonDisabled style={{marginLeft: 'auto'}}>
-                        Publish
-                    </ButtonDisabled>
-                }
+                <ButtonPrimary style={{marginLeft: 'auto'}}
+                               disabled={this.state.hasType && this.state.hasDescription}
+                               onClick={() => this.publish()}>
+                    {this.state.waiting ? <Loader /> : 'Publish'}
+                </ButtonPrimary>
             </Modal>
         )
     }
@@ -123,12 +123,14 @@ PublishContainer.propTypes = {
     fetchTopics: PropTypes.func,
     types: PropTypes.array,
     topics: PropTypes.array,
-    publish: PropTypes.func
+    publish: PropTypes.func,
+    publishSuccess: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
     types: state.editReducer.types,
     topics: state.editReducer.topics,
+    publishSuccess: state.workReducer.success
 });
 
 const mapDispatchToProps = (dispatch) => ({
