@@ -14,7 +14,7 @@ const secret = process.env.SECRET;
 // MongoDB
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect(connect);
+mongoose.connect(connect, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 // Mongoose models
@@ -36,8 +36,8 @@ app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
 // Create session
 app.use(session({
-    // resave: false,
-    // saveUninitialized: true,
+    resave: false,
+    saveUninitialized: true,
     secret: secret,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));

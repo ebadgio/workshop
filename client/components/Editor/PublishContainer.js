@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Modal from "../modules/Modal";
-import {Divider, Text, Note} from "../elements";
+import {Divider, Text, Note, RowApart} from "../elements";
 import {MultiSelect, Select} from "../modules/Select";
 import {FlatTextArea} from "../modules/TextArea";
 import {ButtonPrimary, ButtonDisabled} from "../modules/Button";
@@ -13,6 +13,7 @@ import {Loader} from "../modules/Loader";
 // Thunks
 import fetchTypesThunk from '../../thunks/fetchTypesThunk';
 import fetchTopicsThunk from '../../thunks/fetchTopicsThunk';
+import {push} from "react-router-redux";
 
 class PublishContainer extends React.Component {
     constructor(props) {
@@ -44,8 +45,14 @@ class PublishContainer extends React.Component {
         }
 
         if (this.state.waiting) {
-            this.setState({saveSuccess: nextProps.saveSuccess, waiting: false});
-            console.log('done waiting, status: ', nextProps.saveSuccess);
+            this.setState({saveSuccess: nextProps.publishSuccess, waiting: false});
+
+            if (!nextProps.publishSuccess) {
+                document.getElementById('failure-msg').innerText = 'Something went wrong. Please review and try again.'
+            } else {
+                document.getElementById('close-modal-publish').click();
+                this.props.redirect();
+            }
         }
 
     }
@@ -108,11 +115,14 @@ class PublishContainer extends React.Component {
                 <FlatTextArea rows={2}
                               id={'publish-description'}
                               onChange={(e) => this.onChangeText(e)}/>
-                <ButtonPrimary style={{marginLeft: 'auto'}}
-                               disabled={this.state.hasType && this.state.hasDescription}
-                               onClick={() => this.publish()}>
-                    {this.state.waiting ? <Loader /> : 'Publish'}
-                </ButtonPrimary>
+                <RowApart>
+                    <Text style={{color: '#ef5350'}} id="success-msg" />
+                    <ButtonPrimary style={{marginLeft: 'auto'}}
+                                   disabled={!this.state.hasType && !this.state.hasDescription}
+                                   onClick={() => this.publish()}>
+                        {this.state.waiting ? <Loader style={{height: '20px', width: '20px'}} /> : 'Publish'}
+                    </ButtonPrimary>
+                </RowApart>
             </Modal>
         )
     }
@@ -124,7 +134,8 @@ PublishContainer.propTypes = {
     types: PropTypes.array,
     topics: PropTypes.array,
     publish: PropTypes.func,
-    publishSuccess: PropTypes.bool
+    publishSuccess: PropTypes.bool,
+    redirect: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -135,7 +146,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchTypes: () => dispatch(fetchTypesThunk()),
-    fetchTopics: () => dispatch(fetchTopicsThunk())
+    fetchTopics: () => dispatch(fetchTopicsThunk()),
+    redirect: () => dispatch(push('/my/works'))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublishContainer)

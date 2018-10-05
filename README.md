@@ -20,11 +20,16 @@ This will be a site for editing and sharing creative writing works such as short
       * Command: ```npm install```
   3. **Run Webpack**
       * Command: ```npm run build```
-  3. **Start the server**
+  4. **Set env variables**
+      * To run express server, some env variables must be set:
+        * `SECRET` -- Some string of text for mongo session to use as it's secret
+        * `MONGODB_URI` -- your mongo db instance uri for this app (I use [mLab](https://mlab.com/))
+        * `HASH_KEY` -- hash key used by the password encryption package (bcrypt)
+  5. **Start the server**
       * Command: ```npm run server```
       * Navigate to http://localhost:3000 and you should see a page saying "Home Page"
       * You must register/login in order to see the editor.
-  4. **After making changes always  run webpack**
+  6. **After making changes always  run webpack**
       * During development: ```npm run build```
       * For production: ```npm run prod```
 

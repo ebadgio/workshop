@@ -1,6 +1,6 @@
 
 const workReducer = (state = {
-    success: true,
+    success: false,
     work: {}
 }, action) => {
 
