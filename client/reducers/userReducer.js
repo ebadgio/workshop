@@ -16,6 +16,11 @@ const userReducer = (state = {
 				...state,
 				drafts: action.drafts
 			};
+        case 'USER_WORKS_FETCH':
+            return {
+                ...state,
+                works: action.works
+            };
 		default:
 			return state;
 	}

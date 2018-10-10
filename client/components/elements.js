@@ -7,6 +7,11 @@ export const Row = styled('div')`
 	width: 100%;
 `;
 
+export const RowFit = styled('div')`
+    display: flex;
+	align-items: center;
+`;
+
 export const RowWrap = styled(Row)`
     flex-wrap: wrap;
 `;

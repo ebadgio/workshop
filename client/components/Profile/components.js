@@ -5,7 +5,7 @@ import profileReducer from '../../reducers/profileReducer';
 export const ProfileWrapper = styled('div')`
     width: 800px;
     max-width: 100%;
-    margin-top: 80px;
+    margin-top: 60px;
     box-sizing: border-box;
     padding: 0 10px;
 `;

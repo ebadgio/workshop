@@ -7,11 +7,13 @@ import { push } from 'react-router-redux';
 
 // Components
 import {ProfileWrapper} from "../Profile/components";
-import {RowApart, Column, RowWrap} from "../elements";
+import {RowApart, Column, RowFit} from "../elements";
 import {DraftCard} from "./components";
 
 // Thunks
 import fetchDraftsThunk from "../../thunks/fetchDraftsThunk";
+import fetchWorksThunk from "../../thunks/fetchWorksThunk";
+import Tab from "../modules/Tab";
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -26,7 +28,8 @@ class MyWorksContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.user._id) {
-            this.props.fetchDrafts(this.props.user._id, 0)
+            this.props.fetchDrafts(this.props.user._id, 0);
+            this.props.fetchWorks(this.props.user._id, 0)
         }
     }
 
@@ -70,6 +73,14 @@ class MyWorksContainer extends React.Component {
                     <RowApart>
                         <h1>Your works</h1>
                     </RowApart>
+                    <RowFit style={{margin:'20px 0'}}>
+                        <Tab active>
+                            DRAFTS
+                        </Tab>
+                        <Tab>
+                            PUBLISHED
+                        </Tab>
+                    </RowFit>
                     <Column>
                         {this.state.drafts.map((draft) =>
                             <DraftCard title={draft.title}
@@ -98,6 +109,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchDrafts: (id, pageNum) => dispatch(fetchDraftsThunk(id, pageNum)),
+    fetchWorks: (id, pageNum) => dispatch(fetchWorksThunk(id, pageNum)),
     loadDraft: () => dispatch({type: 'OPEN_EDIT'}),
     navigate: (route) => dispatch(push(route))
 });
