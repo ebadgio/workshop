@@ -21,28 +21,27 @@ const TabText = styled('span')`
 `;
 
 
-const Dot = styled('div')`
-    height: 10px;
-    width: 10px;
+const Line = styled('div')`
+    height: 1px;
+    width: 100%;
     background: #8c9eff;
-    border-radius: 50%;
 `;
 
-const Tab = ({children, active}) => {
+const Tab = ({children, active, onClick}) => {
     if (active) {
         return (
-            <TabWrapper>
+            <TabWrapper onClick={onClick}>
                 <ColumnCenter>
                     <TabText active className="color-hover">
                         {children}
                     </TabText>
-                    <Dot />
+                    <Line />
                 </ColumnCenter>
             </TabWrapper>
         )
     }
     return (
-        <TabWrapper>
+        <TabWrapper onClick={onClick}>
             <TabText className="color-hover">
                 {children}
             </TabText>

@@ -3,7 +3,8 @@ import styled from 'react-emotion';
 
 const Wrapper = styled('div')`
     height: 45px;
-    width: 45px;
+    min-width: 45px;
+    max-width: 45px;
     overflow: hidden;
     border-radius: 50%;
     margin-right: 20px;

@@ -7,8 +7,8 @@ import { push } from 'react-router-redux';
 
 // Components
 import {ProfileWrapper} from "../Profile/components";
-import {RowApart, Column, RowFit} from "../elements";
-import {DraftCard} from "./components";
+import {RowApart, Column, ColumnCenter, RowFit} from "../elements";
+import {DraftCard, WorkCard} from "./components";
 
 // Thunks
 import fetchDraftsThunk from "../../thunks/fetchDraftsThunk";
@@ -21,8 +21,10 @@ class MyWorksContainer extends React.Component {
     constructor() {
         super();
         this.state = {
+            tab: 0,
             drafts: [],
-            works: []
+            works: [],
+            display: []
         }
     }
 
@@ -34,7 +36,7 @@ class MyWorksContainer extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({drafts: nextProps.user.drafts, works: nextProps.user.works})
+        this.setState({drafts: nextProps.user.drafts, works: nextProps.user.works});
     }
 
     // TODO: use moment.js instead
@@ -60,6 +62,10 @@ class MyWorksContainer extends React.Component {
         this.props.navigate('/edit/draft/' + draftId);
     }
 
+    switchTab(tab) {
+        this.setState({tab: tab})
+    }
+
     render() {
 
         // This page requires a logged in user
@@ -74,14 +80,16 @@ class MyWorksContainer extends React.Component {
                         <h1>Your works</h1>
                     </RowApart>
                     <RowFit style={{margin:'20px 0'}}>
-                        <Tab active>
+                        <Tab active={this.state.tab===0}
+                             onClick={() => this.switchTab(0)}>
                             DRAFTS
                         </Tab>
-                        <Tab>
+                        <Tab active={this.state.tab===1}
+                             onClick={() => this.switchTab(1)}>
                             PUBLISHED
                         </Tab>
                     </RowFit>
-                    <Column>
+                    {this.state.tab === 0 ? <Column>
                         {this.state.drafts.map((draft) =>
                             <DraftCard title={draft.title}
                                        onClick={() => this.loadDraft(draft._id)}
@@ -89,7 +97,14 @@ class MyWorksContainer extends React.Component {
                                        updatedAt={this.daysSinceNow(draft.updatedAt)}
                                        key={draft._id}/>
                         )}
-                    </Column>
+                    </Column> : <ColumnCenter>
+                        {this.state.works.map((work) =>
+                            <WorkCard work={work}
+                                      formatDate={this.formatCreatedAt}
+                                      key={work._id}/>
+                        )}
+                    </ColumnCenter>
+                    }
                 </ProfileWrapper>
             </div>
         )

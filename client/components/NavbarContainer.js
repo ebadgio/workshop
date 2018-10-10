@@ -30,31 +30,31 @@ class NavbarContainer extends React.Component {
 		this.setState({user: nextProps.user, isEditing: nextProps.isEditing});
 	}
 
-	componentDidMount() {
-
-		document.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                this.base()
-            } else {
-                if (this.state.scrolled) {
-                    this.base();
-                    this.setState({scrolled: false});
-                } else {
-                    this.lift();
-                }
-            }
-        });
-	}
-
-	base() {
-        const elem = document.getElementById('nav');
-        elem.classList.remove('shadow');
-    };
-
-    lift() {
-        const elem = document.getElementById('nav');
-        elem.classList.add('shadow');
-    }
+    // componentDidMount() {
+    //
+		// document.addEventListener('scroll', () => {
+    //         if (window.scrollY === 0) {
+    //             this.base()
+    //         } else {
+    //             if (this.state.scrolled) {
+    //                 this.base();
+    //                 this.setState({scrolled: false});
+    //             } else {
+    //                 this.lift();
+    //             }
+    //         }
+    //     });
+    // }
+    //
+    // base() {
+    //     const elem = document.getElementById('nav');
+    //     elem.classList.remove('shadow');
+    // };
+    //
+    // lift() {
+    //     const elem = document.getElementById('nav');
+    //     elem.classList.add('shadow');
+    // }
 
 	render() {
 

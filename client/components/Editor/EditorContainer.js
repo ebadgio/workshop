@@ -60,7 +60,7 @@ class EditorContainer extends React.Component {
 	}
 
     publish(title, content, type, topics, desc) {
-        this.props.createWork(this.props.user._id, title, content, type, topics, desc);
+        this.props.createWork(this.props.user._id, title, content, type, topics, desc, this.state.draftId);
     }
 
 	render() {

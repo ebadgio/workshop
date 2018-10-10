@@ -149,6 +149,8 @@ router.get('/fetch/works/:userId', (req,res) => {
         .skip(req.query.pageNum * 10)
         .sort({"updatedAt": -1})
         .populate('author')
+        .populate('type')
+        .populate('topics')
 
         .then((works) => {
             return res.json({success: true, works: works});
@@ -280,8 +282,13 @@ router.post('/create/work', (req, res) => {
             )
         })
 
-        // Send created work back to client
+        // Delete this draft document
         .then((savedTopics) => {
+            return Draft.remove({"_id": req.body.draftId});
+        })
+
+        // Send created work back to client
+        .then((removed) => {
             return res.json({success: true, work: workSend});
         })
 

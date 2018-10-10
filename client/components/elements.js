@@ -17,7 +17,7 @@ export const RowWrap = styled(Row)`
 `;
 
 export const RowApart = styled(Row)`
-    justify-content: apart;
+    justify-content: space-between;
 `;
 
 export const Column = styled('div')`

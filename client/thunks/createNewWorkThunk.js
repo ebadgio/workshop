@@ -1,7 +1,7 @@
 import axios from 'axios';
 import URL from '../../info';
 
-const createNewWorkThunk = (author, title, content, type, topics, description,) => (dispatch) => {
+const createNewWorkThunk = (author, title, content, type, topics, description,draftId) => (dispatch) => {
 
     const headers = {
         author: author,
@@ -9,7 +9,8 @@ const createNewWorkThunk = (author, title, content, type, topics, description,) 
         content: content,
         type: type,
         description: description,
-        topics: topics
+        topics: topics,
+        draftId: draftId
     };
 
     axios.post(URL + 'db/create/work', headers)

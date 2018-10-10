@@ -1,6 +1,6 @@
 import React from 'react';
 import {Editor} from 'slate-react';
-import {Value} from 'slate';
+import {Value, Text} from 'slate';
 import PropTypes from 'prop-types';
 
 // Components
@@ -60,11 +60,11 @@ class TextEditor extends React.Component {
 
         if (this.props.fromDraft) {
             value = Value.fromJSON(JSON.parse(this.props.value));
+            console.log(Text.fromJSON(this.props.value));
             titleVal= this.props.title;
         }
 
         this.setState({value: value, loading: false, titleVal: titleVal});
-
         this.updateMenu()
     }
 
